@@ -23,3 +23,29 @@
 - Executando a imagem em segundo plano e acessando pela porta:
 # docker run -e MYSQL_ROOT_PASSWORD=root --name meu-mysql -d -p 3306:3306 mysql
 
+
+--Criando volumes
+
+- É importante deletar os volumes não utilizados:
+# docker volume prune
+
+- Criando um volume (pasta para onde será salvo os dados do container)
+# docker volume create mysql-db
+
+$ sudo ls /var/lib/docker/volumes
+
+- criando um container e vinculando um volume utilizando uma pasta qualquer dentro do container:
+# docker run -d --name mysql-vol -e MYSQL_ROOT_PASSWORD=root -v mysql-db:/tmp/aula-volume mysql
+
+- Acessando o container:
+# docker exec -it mysql-vol /bin/bash
+
+- Entre na pasta /tmp/aula-volume
+
+- Crie o seguinte arquivo:
+# echo "Testando volumes" > teste.txt
+
+- Saia do container através do comando exit:
+
+- Verifique se o arquivo criado está "espelhado" na pasta:
+# ls /var/lib/docker/volumes/mysql-db/_data

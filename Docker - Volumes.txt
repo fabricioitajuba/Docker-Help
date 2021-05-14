@@ -1,3 +1,16 @@
+Volumes, são pastas onde são armazenadas as informações geradas nos containers, mesmo após a remoção do container, a pasta contendo informações não são apagadas. elas estão localizadas no caminho:
+
+$ sudo ls /var/lib/docker/volumes
+
+- Criando um volume:
+# docker volume create "nome"
+
+- Verificar os volumes criados:
+# docker volume ls
+
+- Deletar os volumes não utilizados:
+# docker volume prune
+
 Ex1 - neste exemplo a pasta /teste será criada na raíz da minha imagem do ubuntu
 
 # docker run -ti -v /teste ubuntu /bin/bash
