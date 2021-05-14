@@ -1,0 +1,33 @@
+--Instalação:
+
+https://docs.docker.com/install/
+
+O Docker só pode ser instalados em sistemas x64 com o kernell do linux maior que a versão 3.8.
+
+-para saber se o sistema é 32 ou 64:
+$ uname -m
+
+-para saber a versão do kernell:
+$ uname -r
+
+-Instalando:
+Entre no modo e na pasta root e digite:
+# curl -fsSL https://get.docker.com/ | sh
+
+Este comando também é usado para atualizar o docker sistema.
+
+obs: caso o curl não esteja instalador, intalar através do comando:
+# apt-get install curl
+
+-se não quiser usar o docker no modo root, basta adicionar o usuário no grupo docker:
+$ sudo usermod -aG docker your-user
+
+-para saber a versão do docker:
+# docker --version
+
+-caso o docker não esteja estartado, digite:
+# /etc/init.d/docker start
+ou
+# service docker start
+
+

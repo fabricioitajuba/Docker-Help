@@ -1,0 +1,93 @@
+--Administrando containers
+
+-Instalando o primeiro exemplo de containers (hello-world):
+#docker run hello-world
+
+o comando "docker run" executa a imagem instalada, caso não haja, ele baixa.
+
+-para saber as imagens instaladas:
+# docker images
+
+-para procurar uma imagem:
+# docker search "imagem"
+
+-para apagar uma imagem:
+# docker rmi "id ou nome da imagem"
+
+-para saber os containers em execussão:
+# docker ps
+
+-para saber todos os containers que não estão ativos e inativos:
+# docker ps -a
+
+-parâmetros "-ti"
+Servem para termos interatividade com o container "t" é para que tenhamos um terminal para acessarmos a imagem e o "i" para que tenhamos uma interatividade.
+
+-parâmetro "-d" para que o container rode em background.
+
+-Exemplo com o comando "-ti" (imagem do ubuntu e entrando no modo terminal):
+# docker run -ti ubuntu /bin/bash
+
+-para saber todos os ips no host (computador):
+# ip addr
+
+Geralmente os ips das imagens criadas começam com "172.17.0.x"
+
+-Exemplo instalando o centos 7
+# docker run -ti centos:7
+
+-para sair finalizando o container: "Ctrl+d"
+
+-para sair do container sem finaliar: "Ctrl+p+q"
+
+-para voltar para o container:
+# docker attach "id do container"
+
+ex:
+
+root@notebook-linux:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c7d93bea3fbd        centos:7            "/bin/bash"         10 minutes ago      Up 9 minutes                            stoic_shannon
+
+para retornar:
+
+root@notebook-linux:~# docker attach c7d93bea3fbd
+
+
+-parar criar um container:
+# docker create ubuntu
+
+-para executar um container:
+# docker run -ti ubuntu
+
+-para saír sem matar o container "Ctrl+p+q"
+
+-para parar um container:
+# docker stop "container id"
+
+-para retornar o container:
+# docker start "container id"
+
+-para pausar o container:
+# docker pause "container id"
+
+-para sair da pausa o container:
+# docker unpause "container id"
+
+-para saber quanto de recursos o container está utilizando:
+# docker stats "container id"
+
+-para saber os processos que estão sendo executados no container:
+# docker top "container id"
+
+-para saber os logs no container:
+# docker logs "container id"
+
+-para remover um container sem estar em execussão:
+# docker rm "container id"
+
+-para remover um container em execussão:
+# docker rm -f "container id"
+
+-para entrar em um container em execussão:
+# docker exec -i -t "container id" /bin/bash

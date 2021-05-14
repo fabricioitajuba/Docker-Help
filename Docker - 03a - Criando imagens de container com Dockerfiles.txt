@@ -1,0 +1,44 @@
+--Exemplo utilizando o apache
+
+-Estando na pasta root, crie a seguinte pasta:
+# mkdir Dockerfile
+
+-Entre na pasta Dockerfile e crie a pasta:
+# mkdir apache
+
+obs: deve existir um arquivo Dockerfile por diretório
+
+-Crie o arquivo Dockerfile através do vi:
+# vi Dockerfile
+
+-Entre com as seguintes linhas:
+
+FROM ubuntu
+MAINTAINER fabricioitajuba
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+
+salve e saia do vi.
+
+-para construir a imagem digite:
+# docker build -t apache:1.0 .
+
+apache -> REPOSITORY
+1.0 -> TAG
+
+-para executar o container
+# docker run -ti apache:1.0 /bin/bash
+
+-dentro do container, execute o comando para saber se o apache está em execussão:
+# ps -ef
+
+o apache não subiu, devemos startar manualmente:
+# /etc/init.d/apache2 start
+
+- se na criação da imagem foi utilizada a debian, podemos utilizar o comando:
+# netstat -atunp
+para ver as portas abertas
+
+
+
+CMD ["/etc/init.d/apache2", "start"]
+
