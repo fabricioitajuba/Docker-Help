@@ -1,3 +1,6 @@
+Quando na criação da imagem, precisar de alguns comandos específicos, o Dockerfile é um arquivo
+que ajudará na criação da mesma.
+
 O arquivo de dockerfile precisa ser escrito com o seguinte nome:
 
 Dockerfile
