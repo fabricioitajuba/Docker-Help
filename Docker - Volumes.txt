@@ -1,0 +1,31 @@
+Ex1 - neste exemplo a pasta /teste será criada na raíz da minha imagem do ubuntu
+
+# docker run -ti -v /teste ubuntu /bin/bash
+
+- para saber se o volume foi criado:
+
+# df -h
+
+- para saber onde o conteúdo do volume foi criado no host:
+
+saia do container através das teclas "Ctrl+p+q" para não matar o container e digite:
+
+# docker inspect -f {{.Mounts}} "container ID"
+
+- entre na pasta apontada pelo comando.
+
+ex:
+cd /var/lib/docker/volumes/ea0387d6800e04c54a0a9b923355a05a76d9b9134279bf25b990fe939b294b1b/_data
+
+veja o arquivo criado
+
+Ex2. Criando um container com um volume apontando para uma pasta no host.
+
+# docker run -ti -v /root/primeiro_dockerfile:/volume ubuntu
+
+/root/primeiro_dockerfile - pasta dentro no host
+/volume - pasta dentro da imagem
+
+ambas compartilhando os mesmos arquivos
+
+

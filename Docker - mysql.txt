@@ -1,0 +1,25 @@
+- Baixando a imagem mais atual:
+# docker pull mysql
+
+- Baixando uma imagem específica:
+# docker pull mysql:5.7
+
+
+- Executando a imagem em segundo plano
+
+(-e está pasnando uma variável de ambiente
+ --name nome para o container
+ -d rodar em segundo plano
+ user = root
+ pass = root):
+
+# docker run -e MYSQL_ROOT_PASSWORD=root --name meu-mysql -d mysql
+
+- Para acessar o servidor:
+
+- Descubra o ip:
+# docker inspect meu-mysql | grep IPAddress
+
+- Executando a imagem em segundo plano e acessando pela porta:
+# docker run -e MYSQL_ROOT_PASSWORD=root --name meu-mysql -d -p 3306:3306 mysql
+

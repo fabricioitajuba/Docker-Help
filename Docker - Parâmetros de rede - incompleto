@@ -1,0 +1,5 @@
+-dns
+# docker run -ti --dns 8.8.8.8 debian
+
+-hostname
+# docker run -ti --hostname catota debian

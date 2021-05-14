@@ -1,0 +1,11 @@
+Fonte:
+https://docs.docker.com/compose/install/
+
+-Instalação
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+-Executar permisão:
+$ sudo chmod +x /usr/local/bin/docker-compose
+
+-Teste
+$ docker-compose --version

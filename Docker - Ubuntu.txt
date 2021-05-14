@@ -1,0 +1,65 @@
+- Para baixar a imagem do ubuntu
+# docker pull ubuntu
+
+- Para baixar uma imagem especifica do ubuntu
+# docker pull ubuntu:14.10
+
+- Para instalar e/ou executar a imagem do ubuntu(última versão) e abrir o terminal:
+# docker run -ti ubuntu /bin/bash
+
+- Para instalar e/ou executar uma versão específica:
+# docker run -ti ubuntu:14.10 /bin/bash
+
+- Para sair sem "matar o container":
+Ctrl + P + Q
+
+- Para saber as alterações feitas no container:
+# docker diff "id"
+
+- Para voltar para dentro do container:
+# docker attach "id"
+
+- Para parar o container:
+# docker stop "id"
+
+- Para saber os containers ativos:
+# docker ps
+
+- Para saber os container ativos e inativos:
+# docker ps -a
+
+- Para startar o container:
+# docker start "id"
+
+- Para remover o container:
+# docker rm "id"
+
+- Para remover o container em execussão:
+# docker rm - f "id"
+
+- Para remover a imagem:
+# docker rmi "id"
+
+- Para remover a imagem em execussão:
+# docker rmi - f "id"
+
+- Para saber se o container está sendo executado:
+# docker ps
+
+- Para executar um comando dentro do container sem entrar no mesmo:
+# docker exec "id" "comando"
+
+ex:
+# docker exec f027fc0c6f34 ls
+# docker exec f027fc0c6f34 ls /home
+# docker exec f027fc0c6f34 cat /etc/issue (para saber a versão da imagem do ubuntu)
+
+- Para saber informações sobre o container:
+# docker inspect "id"
+
+- Para saber quanto de recursos o meu container está utilizando:
+# docker stats "id"
+
+- Para gravar as modificações feitas no container:
+# docker commit "id" "nome da imagem"
+

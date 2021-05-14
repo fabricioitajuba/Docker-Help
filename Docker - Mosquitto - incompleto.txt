@@ -1,0 +1,28 @@
+Fonte:
+https://www.youtube.com/watch?v=1msiFQT_flo&list=LLzsFV0MVegLv2llnQtE-fTA&index=16&t=469s
+
+-Pasta de trabalho:
+/root/mosquitto
+
+-Create volume for mosquitto
+
+# docker volume create mosquitto_data
+
+
+-Install mosquitto in docker
+
+# docker run -itd\
+> --name="mosquitto" \
+> --restart on-failure \
+> -p 1883:1883 \
+> -p 9001:9001 \
+> -v /root/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf \
+> -v mosquitto_data:/mosquitto/data \
+> -v mosquitto_data:/mosquitto/log \
+> eclipse-mosquitto
+
+
+- Create username and password for mosquitto
+
+# docker exec -it mosquitto sh
+/ # mosquitto_passwd -c /mosquitto/config/pwfile teste

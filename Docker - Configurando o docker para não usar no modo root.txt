@@ -1,0 +1,25 @@
+para saber se existe o grupo docker criado:
+
+$ cat /etc/group | grep docker
+
+se existir, aparecerá algo como:
+
+docker:x:999:
+
+caso não apareça, basta criar:
+
+$ sudo groupadd docker
+
+para sabermos em qual grupo o usuário do host pertence:
+
+$ groups $USER
+
+para adicionar o usuário local ao grupo docker:
+
+$ sudo usermod -aG docker $USER
+
+novamente para saber se foi adicionado ao grupo:
+
+$ groups $USER
+
+para que as configurações funcionem, basta reiniciar o computador

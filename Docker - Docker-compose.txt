@@ -1,0 +1,17 @@
+DOCKER-COMPOSE 
+
+IMPORTANTE
+Hoje o Docker compose já vem junto com o Docker, não sendo necessário realizar o download em separado.
+
+===================================
+Instalando o Docker-compose
+
+# wget https://github.com/docker/compose/rel...
+
+# mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+
+
+Verificando se o Compose foi instalado e sua versão:
+
+# docker-compose --version

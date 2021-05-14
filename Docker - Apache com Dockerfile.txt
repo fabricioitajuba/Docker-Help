@@ -1,0 +1,44 @@
+fonte:
+https://www.youtube.com/watch?v=EGWW7_eCeKA&list=LLzsFV0MVegLv2llnQtE-fTA&index=6&t=176s
+
+pasta de trabalho:
+root@notebook-linux:~/Dockerfile/apache#
+
+-Dockerfile:
+
+FROM ubuntu
+MAINTAINER fabricioitajuba
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+EXPOSE 80
+ENTRYPOINT ["apache2ctl"]
+CMD ["-DFOREGROUND"]
+
+-Construindo a imagem:
+
+# docker build -t webserver:latest .
+
+-Para saber se a imagem foi criada:
+
+# docker images
+
+
+-Executando o container:
+
+# docker run -itd webserver:latest
+
+
+-Para saber se o container está sendo executado:
+
+#  docker ps
+
+
+-Para pegar o ip do container:
+
+# docker inspect "CONTAINER ID" | grep IP
+
+ex:
+
+# docker inspect d2787a327beb | grep IP
+
+
+

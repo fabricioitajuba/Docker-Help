@@ -1,0 +1,15 @@
+Como copiar imagens do Docker de um host para outro sem usar um repositório
+
+Você precisará salvar a imagem do Docker como um arquivo tar:
+
+docker save -o <path for generated tar file> <image name>
+
+Em seguida, copie sua imagem para um novo sistema com ferramentas regulares de transferência de arquivos, como cp, scpou rsync(preferencial para arquivos grandes). Depois disso, você precisará carregar a imagem no Docker:
+
+docker load -i <path to image tar file>
+
+PS: Você pode precisar de sudotodos os comandos.
+
+EDIT: você deve adicionar o nome do arquivo (não apenas o diretório) com -o, por exemplo:
+
+docker save -o c:/myfile.tar centos:16

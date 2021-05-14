@@ -1,0 +1,76 @@
+O arquivo de dockerfile precisa ser escrito com o seguinte nome:
+
+Dockerfile
+
+para executar o Dockerfile para criar a imagem, basta entrar com o seguinte comando:
+
+# docker build -t nome:versao .
+
+
+opções:
+
+-FROM -> determina qual imagem de sistema operacional será usado para criar a imagem da aplicação.
+
+ex:
+FROM ubuntu
+
+-MAINTAINER -> Descreve em é o mantenedor do container
+
+ex:
+MAINTAINER Fabricio Ribeiro
+
+-RUN -> executa comandos no início da criação do container, sempre usar "&&" quando for usar mais de um comando. evitar o uso de vários RUNs no Dockerfile.
+
+ex:
+RUN apt-get update && apt-get install apache2 && apt-get clean
+
+-ADD -> adiciona um arquivo ou uma pasta do host em uma pasta do container (envia arquivos .tar)
+
+ex:
+ADD arquivo.txt /pasta/
+
+-CMD -> comando ou parâmetro do entrypoint (principal processo dentro de um container)
+
+ex:
+CMD ["sh", "-c", "echo", "$HOME"]
+
+-LABEL -> coloca metadata (descreve a versão por exemplo do container)
+
+ex:
+LABEL Description="Isso é um teste"
+
+-COPY -> copia arquivo e diretórios para do host para o container menos arquivo .tar (empacotados) 
+
+COPY arquivo.txt /pasta/
+
+-ENTRYPOINT -> Faz com que um processo seja o principal do container, se ele "cair", o container também "cai".
+
+ex:
+ENTRYPOINT ["/usr/bin/apache2ctl", "-D", "FOREGROUND"] -> se o apache cair, o container morre.
+
+Caso o ENTRYPOINT esteja configurado, o CMD é um parâmetro dele. Caso o ENTRYPOINT não esteja configurado, o CMD funciona como comando.
+
+-ENV -> configura variáveis de ambiente para o container.
+
+ex:
+ENV meunome="Fabricio Ribeiro"
+
+-EXPOSE -> expõe a porta do container
+
+ex:
+EXPOSE 80
+
+-USER -> Define quem será o usuário default da imagem, caso não configurado o usuário será o root.
+
+ex:
+USER fabricio
+
+-WORKDIR -> seleciona o diretório em que o container será executado.
+
+ex:
+WORKDIR /catota -> quando executada a imagem, o container estarã todo na pasta /catota
+
+VOLUME -> determina o volume
+
+ex:
+VOLUME /diretório
