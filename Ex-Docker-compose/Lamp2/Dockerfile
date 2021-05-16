@@ -1,2 +1,2 @@
-FROM php:7.1.2-apache 
+FROM php:7.2.6-apache 
 RUN docker-php-ext-install mysqli

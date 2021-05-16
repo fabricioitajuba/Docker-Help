@@ -5,6 +5,19 @@
 # docker pull mysql:5.7
 
 
+
+
+-- Executando da maneira mais simples:
+# docker run --name mybanco -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql
+
+- Para acessar o mysql (-p para pedir a senha):
+# docker exec -it mybanco mysql -p
+
+
+
+
+-- Executando da maneira mais completa:
+
 - Executando a imagem em segundo plano
 
 (-e está pasnando uma variável de ambiente

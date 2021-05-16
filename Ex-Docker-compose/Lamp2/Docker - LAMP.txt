@@ -1,5 +1,0 @@
--Para construir a imagem:
-# docker-compose build
-
--Para executar o container:
-# docker-compose up -d
