@@ -1,1 +1,4 @@
+fonte:
+https://tewarid.github.io/2019/05/24/docker-compose-to-run-node-red-and-mosquitto.html
+
 docker-compose -f test.yml up
