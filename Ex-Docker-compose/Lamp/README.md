@@ -1,13 +1,11 @@
--Fonte:
-https://gist.github.com/jcavat/2ed51c6371b9b488d6a940ba1049189b
+-Lamp -> apache, php, mysql, phpmyadmin
 
 -Criar a seguinte estrutura de diretórios:
 .
 ├── docker-compose.yml
 ├── Dockerfile
-├── dump
+├── mysql
 │   └── myDb.sql
-├── sessions
 └── www
     └── index.php
 
@@ -18,7 +16,7 @@ https://gist.github.com/jcavat/2ed51c6371b9b488d6a940ba1049189b
 # docker-compose up -d
 
 -Para acessar a página:
-no navegador: localhost:8001
+no navegador: localhost:8080
 
 -Para acessar o phpmyadmin:
-no navegador: localhost:8000
+no navegador: localhost:8081  senhas: root/root ou admin/admin
