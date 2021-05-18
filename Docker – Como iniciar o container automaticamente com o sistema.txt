@@ -1,0 +1,18 @@
+Docker – Como iniciar o container automaticamente com o sistema.
+
+
+Utilize ao criar o container o parametro " – – restart = {valor} " veja seus valores:
+
+
+no              - Não reinicia o contêiner automaticamente. (o padrão)
+
+on-failure      - Reinicie o contêiner se ele sair devido a um erro, que se manifesta como um código de                      saída diferente de zero.
+
+unless-stopped	- Reinicie o contêiner, a menos que seja explicitamente interrompido ou o próprio Docker                     esteja parado ou reiniciado.
+
+always	        - Sempre reinicie o contêiner se ele parar.
+
+
+Caso seu container já esteja criado realize o update da seguinte maneira:
+
+docker update –restart=always 0576df221c0b
