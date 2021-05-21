@@ -1,0 +1,10 @@
+
+
+- Executando o docker sem ser sudo:
+
+$ sudo groupadd docker
+$ sudo gpasswd -a <usuário> docker
+$ sudo service docker restart
+$ newgrp Docker
+
+

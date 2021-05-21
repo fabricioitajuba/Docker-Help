@@ -1,0 +1,13 @@
+- Mapear a porta de um container com uma porta escolhida pelo usuário:
+
+$ docker container run --name <nome> -p <porta do host>:<porta do container> -d <imagem>
+
+Ex:
+$ docker container run --name ws1 -p 8080:80 -d nginx
+
+- Mapear a porta de um container com uma porta aleatória escolhida pelo docker:
+
+$ docker container run --name <nome> -P -d <imagem>
+
+Ex:
+$ docker container run --name ws1 -P -d nginx

@@ -1,0 +1,30 @@
+$ docker container run -d --name <nome> -p<porta do host>:<porta do container> -v <pasta do host>:<pasta do container> <imagem>
+
+Ex:
+$ docker container run -d --name ws1 -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html nginx
+
+- Para inspecionar um container:
+$ docker container inspect <id ou nome do container>
+
+podemos ver o volume criado:
+
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/fabricio/Temp/html",
+                "Destination": "/usr/share/nginx/html",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+
+ou
+
+$ docker container inspect ws1 | grep Source
+
+                "Source": "/home/fabricio/Temp/html",
+
+$ docker container inspect ws1 | grep Destination
+
+                "Destination": "/usr/share/nginx/html",
+

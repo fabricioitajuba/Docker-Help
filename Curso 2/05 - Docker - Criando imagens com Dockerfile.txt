@@ -1,0 +1,27 @@
+Exemplo, criando uma imagem do nginx através da imagem do debian 8
+
+- Dentro de uma pasta, crie um arquivo com o nome "Dockerfile"
+
+- Entre com os seguintes comandos:
+
+FROM debian:8
+LABEL version="1.0" description="Debin/Nginx"
+RUN apt-get update && apt-get install -y nginx && apt-get clean
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/nginx"]
+CMD ["-g","daemon off;"]
+
+- Para criar a imagem:
+$ docker build -t <nome escolhido para a imagem> .
+
+Ex:
+$ docker build -t nginx/debian:1.0 .
+
+- Para ver se a imagem foi criada:
+$ docker images
+
+- Para criar um container utilizando a imagem criada
+$ docker container run -d --name ws1 -p 8080:80 -v $(pwd)/html:/var/www/html nginx/debian:1.0
+
+- Para matar o container:
+$ docker container rm -f ws1

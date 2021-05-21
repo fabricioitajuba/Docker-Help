@@ -1,0 +1,79 @@
+## Criando containers
+
+- Para criar um container:
+$ docker container run <imagem>
+
+ex:
+$ docker container run hello-world
+
+- Para saber quais containers estão ativos:
+$ docker container ps
+
+- Para saber quais containers estão ativos e inativos:
+$ docker container ps -a
+
+- Para visualizar as imagens:
+$ docker images
+
+- Para procutar uma imagem:
+$ docker search <imagem>
+
+Ex:
+$ docker search alpine
+
+- Para procutar uma imagem com uma determinada versão:
+$ docker search <imagem:versão>
+
+Ex:
+$ docker search alpine:3.6
+
+- Para baixar uma imagem:
+$ docker image pull <imagem>
+
+Ex:
+$ docker image pull alpine
+
+- Para executar um container e executar um comando:
+$ docker container run <imagem> <comando>
+
+Ex:
+$ docker container run alpine ls -l
+
+- Para remover um container:
+$ docker container rm <id do container>
+
+- Para executar um container e entrar dentro do mesmo:
+$ docker container run -it <imagem> /bin/sh
+
+- Para sair do container e desativa-lo digite "exit"
+- Para sair do container sem desativa-lo digite "Crtl p q"
+
+- Para remover um container em execussão:
+$ docker container rm -f <id do container ou nome>
+
+- Para ativar um container inativo:
+$ docker container start <id do container ou nome>
+
+- Para executar um comando dentro do container em execussão:
+$ docker container exec <id do container ou nome> <comando>
+
+- Para desativar um container ativo:
+$ docker container stop <id do container ou nome >
+
+- Para criar um container através de uma imagem com outro nome:
+$ docker container run --name <nome> <imagem>
+
+Ex:
+$ docker container run --name teste alpine
+
+- Para criar um container através de uma imagem com outro nome e interagir com ele:
+$ docker container run -it --name <nome> <imagem> /bin/sh
+
+Resumindo:
+ docker container run <imagem> <comando>
+ docker container run -it <imagem> <comando>
+ docker container start <container_ID ou nome>
+ docker container exec <container_ID ou nome> <comando>
+ docker container stop <container_ID ou nome>
+ docker container run --name <container_ID ou nome> <imagem>
+ docker container rm <container_ID ou nome>
