@@ -1,0 +1,23 @@
+Apache
+
+-Criar a seguinte estrutura de diretórios:
+.
+├── docker-compose.yml
+└── www
+    └── index.html
+
+-Para executar o container:
+$ docker-compose up -d
+
+-Para restartar o container:
+$ docker-compose restart
+
+-Para parar o container:
+$ docker-compose stop
+
+-Para subir o container:
+$ docker-compose start
+
+-Para acessar a página:
+no navegador: localhost:8080
+
