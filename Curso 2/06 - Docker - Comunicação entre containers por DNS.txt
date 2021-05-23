@@ -9,12 +9,13 @@ $ docker run -ti --name container1 ubuntu /bin/bash
 saia do container com "Ctrl P Q"
 
 -Crie o Container2:
-$ docker container run -d --name container2 ubuntu
+$ docker run -ti --name container2 ubuntu /bin/bash
 
 -Instale o comando ping:
 # apt update
 # apt install iputils-ping
 saia do container com "Ctrl P Q"
+
 
 -Verifique se os containers foram criados e estão sendo executados:
 $ docker ps
@@ -60,7 +61,7 @@ $ docker container attach container2
 - Execute um ping para o container1
 # ping container1
 Para sair, Ctrl+c
-Saia do container1 Ctrl P Q
+Saia do container2 Ctrl P Q
 
 
 -Caso queira desativar os containers 1 e 2:
