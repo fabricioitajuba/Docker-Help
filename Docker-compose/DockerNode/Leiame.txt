@@ -1,0 +1,55 @@
+Como foi configurado o projeto:
+
+$ npm init -y
+$ touch index.js
+$ touch Dockerfile
+$ npm install express
+
+
+-- Para executar sem o Docker-Compose
+em package.json, depois da linha "test", insira a linha:
+
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+
+- Execute o seguinte comando para criar o dockerfile:
+$ docker build -t teste/dockernode .
+
+- Execute o seguinte comando e veja se a imagem foi criada:
+$ docker images
+
+- Crie o seguinte container:
+$ docker run -d --name teste-node -p 3000:3000 teste/dockernode
+
+- Verifique se o container foi criado através do comando:
+$ docker ps
+
+- Abra o navegador e acesse o seguinte endereço:
+http://localhost:3000/
+
+- Para para o container:
+$ docker container stop teste-node
+
+- Para remover o container:
+$ docker container rm -f teste-node
+
+
+-- Para executar com o DockerCompose
+
+- Crie o arquivo "docker-compose.yml"
+
+- Instale o pacote nodemon
+$ npm install nodemon
+
+em package.json, altere a seguinte linha:
+
+    "start": "nodemon index.js"
+
+- "Suba" o seguinte container:
+$ docker-compose up -d
+
+- Para parar o container:
+$ docker container stop teste-node
+
+- Para excluir o container:
+$ docker container rm -f teste-node
