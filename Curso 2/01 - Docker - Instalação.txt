@@ -5,6 +5,6 @@
 $ sudo groupadd docker
 $ sudo gpasswd -a <usuário> docker
 $ sudo service docker restart
-$ newgrp Docker
+$ newgrp docker
 
 
