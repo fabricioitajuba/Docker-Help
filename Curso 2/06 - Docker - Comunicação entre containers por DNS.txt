@@ -4,16 +4,14 @@
 $ docker run -ti --name container1 ubuntu /bin/bash
 
 -Instale o comando ping:
-# apt update
-# apt install iputils-ping
+# apt-get update && apt-get install -y iputils-ping && apt-get clean
 saia do container com "Ctrl P Q"
 
 -Crie o Container2:
 $ docker run -ti --name container2 ubuntu /bin/bash
 
 -Instale o comando ping:
-# apt update
-# apt install iputils-ping
+# apt-get update && apt-get install -y iputils-ping && apt-get clean
 saia do container com "Ctrl P Q"
 
 

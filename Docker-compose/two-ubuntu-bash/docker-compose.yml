@@ -1,13 +1,34 @@
-cont1:
-   container_name: container1
-   image: ubuntu:14.04
-   entrypoint: /bin/sh
-   stdin_open: true
-   tty: true
+version: "3.7"
 
-cont2:
-   container_name: container2
-   image: ubuntu:14.04
-   entrypoint: /bin/sh
-   stdin_open: true
-   tty: true
+services:   
+
+   container1:
+        build: .
+        image: teste-ubuntu:14.04 
+        container_name: container1
+        image: teste-ubuntu:14.04
+        networks: 
+           ubuntu_rede:
+             aliases: 
+               - rede
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+
+   container2:
+        container_name: container2
+        image: teste-ubuntu:14.04
+        networks: 
+           ubuntu_rede:
+             aliases: 
+               - rede
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+
+networks:
+   ubuntu_rede:
+      name: rede
+      driver: bridge
+      ipam:
+         driver: default

@@ -1,0 +1,16 @@
+Docker-compose
+
+1 - Verificar sintaxe
+Processar o arquivo de composição e verificar a sintaxe
+$ docker-compose build
+
+2 - Fazer um teste
+Processar o arquivo de composição e iniciar a aplicação
+$ docker-compose up -d
+
+3 - Desfazer a operação
+Para remover os containers, redes e volumes descritos no arqivo de composição
+$ docker-compose down -v
+
+- mostra os containers criados:
+$ docker-compose ps
