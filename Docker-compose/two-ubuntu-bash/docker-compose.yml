@@ -11,6 +11,8 @@ services:
            ubuntu_rede:
              aliases: 
                - rede
+        volumes:
+               - ./pasta:/home/
         entrypoint: /bin/sh
         stdin_open: true
         tty: true
@@ -22,6 +24,8 @@ services:
            ubuntu_rede:
              aliases: 
                - rede
+        volumes:
+               - ./pasta:/home/
         entrypoint: /bin/sh
         stdin_open: true
         tty: true
