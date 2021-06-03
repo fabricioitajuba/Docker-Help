@@ -6,9 +6,9 @@ Utilize ao criar o container o parametro " – – restart = {valor} " veja seus
 
 no              - Não reinicia o contêiner automaticamente. (o padrão)
 
-on-failure      - Reinicie o contêiner se ele sair devido a um erro, que se manifesta como um código de                      saída diferente de zero.
+on-failure      - Reinicie o contêiner se ele sair devido a um erro, que se manifesta como um código de saída diferente de zero.
 
-unless-stopped	- Reinicie o contêiner, a menos que seja explicitamente interrompido ou o próprio Docker                     esteja parado ou reiniciado.
+unless-stopped	- Reinicie o contêiner, a menos que seja explicitamente interrompido ou o próprio Docker esteja parado ou reiniciado.
 
 always	        - Sempre reinicie o contêiner se ele parar.
 

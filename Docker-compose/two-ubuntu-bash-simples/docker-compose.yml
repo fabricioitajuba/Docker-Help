@@ -1,0 +1,13 @@
+cont1:
+   container_name: container1
+   image: ubuntu:14.04
+   entrypoint: /bin/sh
+   stdin_open: true
+   tty: true
+
+cont2:
+   container_name: container2
+   image: ubuntu:14.04
+   entrypoint: /bin/sh
+   stdin_open: true
+   tty: true
