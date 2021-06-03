@@ -1,4 +1,5 @@
-
+- Instalação:
+$ sudo apt install docker.io docker docker-compose
 
 - Executando o docker sem ser sudo:
 

@@ -1,0 +1,36 @@
+Grafana com Influxdb
+Fonte:
+https://www.youtube.com/watch?v=3G1RsUgJNg0
+
+- Criar a rede:
+$ docker network create monitor_network
+
+- Para verificar:
+$ docker network ls
+
+- Criar os seguintes volumes:
+$ docker volume create influxdb-volume
+$ docker volume create grafana-volume
+
+- Para verificar:
+$ docker volume ls
+
+- Para criar os containers:
+$ docker-compose up -d
+
+- Para verificar se o grafana está funcionando, abra o navegador e acesse a url:
+http://localhost:3000/
+
+- Para verificar se o influxdb está funcionando, abra o navegador e acesse a url:
+http://localhost:8086/query
+
+
+-- Inserindo dados no influx
+
+- Acesse o container:
+$ docker exec -it influxdb_container sh
+
+- Acesse o banco de dados:
+# influx
+
+
