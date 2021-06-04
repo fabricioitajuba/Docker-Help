@@ -15,6 +15,17 @@ $ docker volume create grafana-volume
 - Para verificar:
 $ docker volume ls
 
+
+
+--- Criando o container sem o docker compose:
+$ docker run -d -e INFLUXDB_ADMIN_USER:admin -e INFLUXDB_ADMIN_PASSWORD:admin --name influxdb influxdb
+
+- Para acessar:
+# influx -host localhost -port 8086 -username admin -password admin
+
+
+
+--- Criando o container com o docker compose:
 - Para criar os containers:
 $ docker-compose up -d
 
@@ -25,7 +36,7 @@ http://localhost:3000/
 http://localhost:8086/query
 
 
--- Inserindo trabalhando com o influx
+-- Trabalhando com o influx
 
 - Acesse o container do influx:
 $ docker exec -it influxdb_container sh
@@ -42,15 +53,47 @@ $ docker exec -it influxdb_container sh
 - Para usar o banco de dados:
 > use mysampledb
 
+- Para mostrar as tabelas do banco:
+> show measurements
+
 - Para inserir os dados "serverA" e "10" nos campos "host" e "value" na tabela "cpu":
 > INSERT cpu,host=serverA value=10
 
 - Inserir vários outros dados:
-> INSERT cpu,host=serverA value=8
-> INSERT cpu,host=serverA value=6
-> INSERT cpu,host=serverA value=3
-> INSERT cpu,host=serverA value=10
-> INSERT cpu,host=serverA value=10
+> insert cpu,host=serverA value=8
+> insert cpu,host=serverA value=6
+> insert cpu,host=serverA value=3
+> insert cpu,host=serverA value=10
+> insert cpu,host=serverA value=10
+
+outro exemplo:
+> insert demo,host=serverA,region=us_west value=1.64
 
 - Para visualizar todos os campos inseridos:
 > select * from cpu
+
+- Para ver os campos da tabela (não mostra value):
+> show tag keys from "cpu"
+
+- Para saber o tipo de valor em "value"
+> show field keys from "cpu"
+
+- Para mostrar todos os campos da coluna "host":
+> show tag values from "cpu" with key in ("host")
+
+
+-- O banco de dados também pode ser usado por uma interface HTTP, sendo possível criar, excluir, escrever, modificar, entre outras operações, com uma base de dados.
+
+Por exemplo:
+
+Sendo o InfluxDB acessível no localhost pela porta 8086, com o comando:
+
+curl -i -XPOST http://localhost:8086/query –data-urlencode “q=CREATE DATABASE serverdoin”
+
+Cria-se uma base de dados chamada “serverdoin”.
+
+Para escrever algo nesta base de dados, utiliza-se o comando:
+
+curl -i -XPOST ‘http://localhost:8086/write?db=serverdoin’ –data-binary ‘catraca,local=portaria,posicao=frente’
+
+Onde criamos uma tabela chamada “catraca” que tem as propriedades “local” e “posicao”.
