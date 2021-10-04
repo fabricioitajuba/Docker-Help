@@ -39,7 +39,7 @@ log_dest file /mosquitto/log/mosquitto.log
 
 docker restart "id do container"
 
-docker exec -it "id do container"sh
+docker exec -it "id do container" sh
 
 / # mosquitto_passwd -c /mosquitto/config/mosquitto.passwd "node de usuário"
 
