@@ -62,3 +62,16 @@ $ sudo ls /var/lib/docker/volumes
 
 - Verifique se o arquivo criado está "espelhado" na pasta:
 # ls /var/lib/docker/volumes/mysql-db/_data
+
+
+
+- Criando um container completo:
+# docker run -e MYSQL_ROOT_PASSWORD=root --name mysql --restart always -d -p 3306:3306 -v mysql-db:/home/fabricio/Temp mysql:5.7
+
+
+- no raspberrypi
+# docker run -e MYSQL_ROOT_PASSWORD=root --name mysql --restart always -d -p 3306:3306 -v mysql-db:/home/pi/docker/mysql hypriot/rpi-mysql
+
+- phpmyadmin
+# docker run --name phpmyadmin --restart always -d --link mysql:db -p 8080:80 phpmyadmin:5.1.0
+
