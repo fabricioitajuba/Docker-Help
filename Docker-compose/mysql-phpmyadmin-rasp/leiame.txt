@@ -1,0 +1,14 @@
+- Para subir os containers pela primeira vez:
+docker-compose up -d
+
+- Para parar os containers:
+docker-compose stop
+
+- Para startar os containers:
+docker-compose start
+
+- Para re-startar os containers:
+docker-compose start
+
+- Para parar os containers e deletar os volumes:
+docker-compose down -v
