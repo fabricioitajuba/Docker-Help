@@ -9,6 +9,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: admin
             MYSQL_ROOT_PASSWORD: root
+        restart: always
         volumes:
           - db:/var/lib/mysql
     phpmyadmin:
@@ -22,6 +23,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: admin
             MYSQL_ROOT_PASSWORD: root
+        restart: always
         volumes:
             - /sessions
 volumes:
