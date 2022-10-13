@@ -1,0 +1,9 @@
+sudo apt update
+sudo apt upgrade
+sudo apt install raspberrypi-kernel raspberrypi-kernel-headers
+curl -sSL https://get.docker.com | sh
+sudo usermod -aG docker pi
+sudo reboot
+docker --version
+
+"pi" nome de usuário
