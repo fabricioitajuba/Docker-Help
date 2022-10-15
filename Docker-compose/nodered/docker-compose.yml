@@ -14,7 +14,7 @@ services:
       - node-red-net
     volumes:
       - node-red-data:/data
-
+    restart: unless-stopped
 volumes:
   node-red-data:
 
