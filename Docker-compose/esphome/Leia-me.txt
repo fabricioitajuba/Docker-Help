@@ -1,0 +1,11 @@
+Permite a integração de dispositivos ESP
+
+Se estiver utilizando o Home Assistant via docker, adicione as seguintes linhas:
+
+panel_iframe:
+  esphome:
+    title: 'ESPHome'
+    url: 'http://192.168.0.2:6052'
+    icon: mdi:raspberry-pi
+
+no arquivo /config/configuration.yaml para aparecer na barra lateral.
