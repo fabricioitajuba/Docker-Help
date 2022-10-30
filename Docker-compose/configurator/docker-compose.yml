@@ -1,0 +1,16 @@
+version: '3'
+services:
+  hass-configurator:
+    image: "causticlab/hass-configurator-docker:arm"
+    container_name: hass-configurator
+    restart: unless-stopped
+#    environment:
+#      PUID: 1000
+#      PGID: 1000
+    ports:
+      - "3218:3218/tcp"
+    volumes:
+      #- "./configurator-config:/config"
+      - "/home/fabricio/docker/homeassistant:/config"
+      - "./hass-config:/hass-config"
+#    user: "${PUID}:${PGID}"
