@@ -4,7 +4,8 @@ services:
     container_name: esphome
     image: esphome/esphome
     volumes:
-      - ./config:/config
+#      - ./config:/config
+      - /home/fabricio/docker/homeassistant/config/esphome:/config
       - /etc/localtime:/etc/localtime:ro
     restart: always
     privileged: true
