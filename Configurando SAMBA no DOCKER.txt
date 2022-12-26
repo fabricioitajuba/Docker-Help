@@ -1,0 +1,64 @@
+Fonte:
+http://www.freekb.net/Article?id=3428
+
+- Crie a pasta samba e entre dentro da pasta:
+mkdir samba
+cd samba
+
+- Crie a pasta data e entre dentro da pasta:
+mkdir data
+cd data
+
+- Crie o arquivo smb.conf:
+nano smb.conf
+
+- Entre com o seguinte código:
+
+[global]
+workgroup = SAMBA
+security = user
+passdb backend = tdbsam
+printing = bsd
+printcap name = /dev/null
+
+#[homes]
+#comment = Home Directories
+#valid users = %S, %D%w%S
+#browseable = No
+#read only = No
+#inherit acls = Yes
+
+[Servidor]
+path = /usr/local/share
+browsable = yes
+public = yes
+writeable = yes
+
+- Salve (Ctrl+o) e saia (Ctrl+x) 
+
+obs: Caso queira mostrar a pasta de cada usuário, descomentar as linhas apartir de [homes], apague os "#"
+
+- Suba o container:
+docker run -d -p 139:139 -p 445:445 -v /home/fabricio/docker/samba/data:/etc/samba -v /home/fabricio:/usr/local/share --restart unless-stopped --name samba dperson/samba
+
+
+-- Criando um novo usuário:
+
+- Entre no container:
+docker exec -it samba /bin/sh
+
+- Crie um novo usuário:
+useradd -p itsasecret -d /home/fabricio -s /bin/bash fabricio
+
+- Crie uma senha para o usuário:
+smbpasswd -a fabricio
+
+- Saia do container:
+exit
+
+- Quando for feita alguma alteração no smb.conf reinicie o container:
+docker restart samba
+
+
+-para remover o container em execussão:
+# docker rm -f samba
