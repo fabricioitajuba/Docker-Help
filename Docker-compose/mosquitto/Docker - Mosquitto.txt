@@ -43,8 +43,8 @@ docker exec -it "id do container" sh
 
 / # mosquitto_passwd -c /mosquitto/config/mosquitto.passwd "node de usuário"
 
-Password: "crie uma senha"
-Reenter password: "senha"
+Password: Teste1234
+Reenter password: Teste1234
 
 / # exit
 
@@ -63,3 +63,8 @@ docker restart "id do container"
 
 
 para testar, pode usar o mqttbox como extensão do chrome
+
+Para monitorar de outra máquina:
+
+sudo apt-get install mosquitto-clients
+mosquitto_sub -h 192.168.0.2 -t "/estacao/temperatura/" -u fabricio -P Teste1234
