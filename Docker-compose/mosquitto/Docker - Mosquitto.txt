@@ -1,3 +1,17 @@
+Estrutura do diretório:
+
+´´´
+.
+├── config
+│   ├── mosquitto.conf
+│   └── mosquitto.passwd
+├── data
+│   └── mosquitto.db
+├── docker-compose.yml
+└── log
+    └── mosquitto.log
+´´´
+
 mkdir docker
 cd docker
 mkdir mqtt
