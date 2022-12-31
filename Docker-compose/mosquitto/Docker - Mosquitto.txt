@@ -1,7 +1,7 @@
 Estrutura do diretório:
 
 ´´´
-.
+mosquitto
 ├── config
 │   ├── mosquitto.conf
 │   └── mosquitto.passwd
@@ -12,17 +12,13 @@ Estrutura do diretório:
     └── mosquitto.log
 ´´´
 
-mkdir docker
-cd docker
-mkdir mqtt
-cd mqtt
+Dentro da pasta docker, criar as pastas config/ data/ log/
 
 sudo nano docker-compose.yml
 -----------------------
 version: '2'
 
 services:
-##Mosquitto
   mqtt:
     container_name: mosquitto
     image: eclipse-mosquitto:2.0.11
@@ -31,9 +27,9 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - /home/pi/docker/mqtt/config:/mosquitto/config
-      - /home/pi/docker/mqtt/data:/mosquitto/data
-      - /home/pi/docker/mqtt/log:/mosquitto/log
+      - ./config:/mosquitto/config
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
 volumes:
   config:
   data:
@@ -51,11 +47,11 @@ persistence_location /mosquitto/data/
 log_dest file /mosquitto/log/mosquitto.log
 -----------------------
 
-docker restart "id do container"
+docker restart mosquitto
 
-docker exec -it "id do container" sh
+docker exec -it mosquitto sh
 
-/ # mosquitto_passwd -c /mosquitto/config/mosquitto.passwd "node de usuário"
+/ # mosquitto_passwd -c /mosquitto/config/mosquitto.passwd fabricio
 
 Password: Teste1234
 Reenter password: Teste1234
@@ -73,7 +69,7 @@ listener 9001
 protocol websockets
 -----------------------------
 
-docker restart "id do container"
+docker restart mosquitto
 
 
 para testar, pode usar o mqttbox como extensão do chrome
