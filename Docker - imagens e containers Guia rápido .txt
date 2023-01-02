@@ -1,0 +1,55 @@
+-para saber as imagens instaladas:
+# docker images
+
+-para procurar uma imagem:
+# docker search alpine
+
+-Baixar uma imagem:
+# docker pull alpine
+
+-Deletar uma imagem:
+# docker rmi alpine
+
+
+
+-para saber os containers em execussão:
+# docker ps
+
+-para saber todos os containers que não estão ativos e inativos:
+# docker ps -a
+
+
+-Criando um container bem simples e entrar dentro dele:
+# docker run -it alpine
+
+Para sair: Ctrl+P+Q
+
+
+
+
+-Criando um container bem simples:
+# docker run -it -d alpine
+
+-Entrar dentro do container em execussão:
+# docker exec -it "container id" sh
+
+-para remover um container em execussão:
+# docker rm -f "container id"
+
+
+
+-Criando um container simples dando um nome:
+# docker run -it -d --name mini-pc alpine
+
+-Entrar dentro do container em execussão:
+# docker exec -it mini-pc sh
+
+-para remover um container em execussão:
+# docker rm -f mini-pc
+
+
+
+-Criando um container mais elaborado:
+# docker run -it -d --name mini-pc --restart always -v /home/fabricio/docker/alpine/teste:/home alpine
+
+
