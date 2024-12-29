@@ -5,4 +5,4 @@ https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-
 $ sudo apt install docker-compose
 
 -Teste
-$ docker-compose --version
+$ docker compose version
