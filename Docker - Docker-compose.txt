@@ -10,4 +10,4 @@ $ sudo apt install docker-compose
 
 Verificando se o Compose foi instalado e sua versão:
 
-# docker-compose --version
+# docker compose version
