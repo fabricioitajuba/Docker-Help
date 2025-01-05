@@ -1,17 +1,17 @@
 - Para subir os containers pela primeira vez:
-docker-compose up -d
+docker compose up -d
 
 - Para parar os containers:
-docker-compose stop
+docker compose stop
 
 - Para startar os containers:
-docker-compose start
+docker compose start
 
 - Para re-startar os containers:
-docker-compose restart
+docker compose restart
 
 - Para parar os containers e deletar os volumes:
-docker-compose down -v
+docker compose down -v
 
 - Para saber quais container estão sendo executados:
 docker ps -a
