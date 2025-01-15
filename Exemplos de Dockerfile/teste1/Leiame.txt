@@ -1,0 +1,26 @@
+Esta pasta foi criada em C:\docker
+
+- Criando uma imagem apartir do Dockerfile:
+
+$ docker build -t image1:latest .
+
+- Verificando se a imagem foi criada:
+
+$ docker images
+
+- Criando um container apartir da imagem criada:
+
+$ docker run -it image1:latest sh
+
+- Criando um container a partir da imagem criada com nome e volume:
+
+$ docker run --name container1 -v "C:\docker\teste1\config:/home/config" -it image1:latest sh
+
+- Deletando um container sem estar sendo executado:
+
+$ docker rm "id"
+
+- Deletando uma imagem:
+
+$ docker rmi "nome"
+
