@@ -2,14 +2,14 @@ version: '3.1'
 
 services:
 
-  db:
+  mariadb:
     image: mariadb:latest
     container_name: my-mariadb
     restart: always
     environment:
-      MARIADB_USER: user
-      MARIADB_PASSWORD: mariadbPW
-      MARIADB_ROOT_PASSWORD: mariadbrootPW
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: pass
+      MARIADB_ROOT_PASSWORD: pass
     volumes:
       - "./mariadb-data/data:/var/lib/mysql/data/"
       - "./mariadb-data/logs:/var/lib/mysql/logs/"
@@ -20,6 +20,6 @@ services:
     image: phpmyadmin:latest
     restart: always
     ports:
-      - 8080:80
+      - 81:80
     environment:
       - PMA_ARBITRARY=1

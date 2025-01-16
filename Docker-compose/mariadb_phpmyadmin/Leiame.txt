@@ -1,0 +1,7 @@
+docker compose up -d
+
+localhost:81
+
+Servidor: mariadb
+Usuário: admin
+Senha: pass
