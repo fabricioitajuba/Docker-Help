@@ -1,6 +1,14 @@
-docker compose up -d
+- Para subir o(s) container(s):
+$ docker compose up -d
 
-localhost:81
+- Para subir o(s) container(s) e deletar os volumes e redes:
+$ docker compose down -v
+
+- Para acessar o phpmyadmin, abra o navegador e digite:
+
+http://localhost:81
+
+- Entre com os seguintes dados:
 
 Servidor: mariadb
 Usuário: admin
