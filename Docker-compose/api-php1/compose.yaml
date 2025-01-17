@@ -1,0 +1,6 @@
+services:
+  api-php1:
+    image: fabricioitajuba/flr-api-php1
+    container_name: api-php1
+    ports:
+      - 7376:80
