@@ -1,0 +1,47 @@
+services:
+
+  web:
+    image: apache-php
+    container_name: apache-php
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "80:80"
+    links:
+      - db
+    networks:
+      - default
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - ./db:/etc/mysql/conf.d
+      - ./db_vol:/var/lib/mysql
+    networks:
+      - default
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1.0
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 81:80
+    links:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - default
+

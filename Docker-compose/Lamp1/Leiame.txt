@@ -1,0 +1,22 @@
+-Lamp -> apache, php, mysql, phpmyadmin (melhorado)
+
+Este exemplo cria o banco de dados caso não exista.
+O arquivo .env possui as variáveis de ambiente.
+
+-Para construir a imagem:
+# docker build -t apache-php:latest .
+
+-Para criar o container:
+# docker compose --env-file .env up -d
+
+-Para acessar a página:
+no navegador: localhost:80
+
+-Para acessar o phpmyadmin:
+no navegador: localhost:81  
+
+Servidor: db
+Usuário: root ou admin
+Senha: pass
+
+senhas: root/pass ou admin/pass
