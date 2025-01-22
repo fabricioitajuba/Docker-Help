@@ -13,6 +13,8 @@ const btnAtualizar = document.getElementById("btnAtualizar");
 const table = document.getElementById("table");
 const resultado = document.getElementById("resultado");
 
+document.getElementById("btnAtualizar").disabled = true
+
 readBD();
 
 //Função para validar os dados do formulário
@@ -41,6 +43,12 @@ function limpaCampos(){
     nome.focus()
 }
 
+//Trata o botão Limpar campos
+btnLimpar.addEventListener("click", ()=>{
+    limpaCampos()
+})
+
+//Função para ler o bando de dados
 function readBD(){
 
     fetch("api-read.php", {
@@ -84,7 +92,7 @@ btnInserir.addEventListener("click", ()=>{
                 readBD();
             }
             else{
-                alert("Dados não inseridos");
+                alert("Dados não inseridos!");
             }
         })
 
@@ -93,3 +101,88 @@ btnInserir.addEventListener("click", ()=>{
     }
 })
 
+//Função para deletar uma linha na tabela
+function deletaLinhaTabela(idLinha){
+
+    if(confirm("Deseja realmente apagar o registro " + idLinha + "?")){
+
+        let idx = idLinha;
+
+        let dados = {
+            "id": idx
+        }        
+
+        fetch("api-delete.php", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+
+            "body": JSON.stringify(dados)
+
+        }).then(function(response){
+            return response.text();
+        }).then(function(data){
+
+            //console.log(data);
+            
+            if(data == "ok"){
+                alert("Dados deletados com sucesso!");
+                readBD();
+            }
+            else{
+                alert("Dados não deletados!");
+            }
+        })               
+    }
+}
+
+//Função para editar uma linha da tabela
+function editaLinhaTabela(idx, nomex, notax){
+    
+    document.getElementById("nome").innerHTML = nomex;
+    document.getElementById("nota").innerHTML = notax;
+
+    document.getElementById("btnAtualizar").disabled = false
+}
+
+//Trata o botão Inserir
+btnAtualizar.addEventListener("click", ()=>{
+
+    if(confirm("Deseja realmente editar o registro " + idLinha + "?")){
+
+        let idx = idLinha;
+        let nomex = nome.value;
+        let notax = nota.value;
+
+        let dados = {
+            "id": idx,
+            "nome": nomex,
+            "nota": notax            
+        }        
+
+        fetch("api-update.php", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+
+            "body": JSON.stringify(dados)
+
+        }).then(function(response){
+            return response.text();
+        }).then(function(data){
+
+            //console.log(data);
+            
+            if(data == "ok"){
+                alert("Dados alterados com sucesso!");
+                readBD();
+            }
+            else{
+                alert("Dados não alterados!");
+            }
+        })               
+    }
+
+})

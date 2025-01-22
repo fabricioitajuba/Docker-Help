@@ -10,9 +10,9 @@
             <td>".$linha['id']."</td>
             <td>".$linha['nome']."</td>
             <td>".$linha['nota']."</td>
-            <td>
-                <button type='button' class='btn btn-editar'>Editar</button>
-                <button type='button' class='btn btn-deletar'>Deletar</button>
+            <td>              
+                <button onclick='editaLinhaTabela(".$linha['id'].", ".$linha['nome'].", ".$linha['nota'].")'>Editar</button>
+                <button onclick='deletaLinhaTabela(".$linha['id'].")'>Deletar</button>                
             </td>
         </tr>";	
     }
