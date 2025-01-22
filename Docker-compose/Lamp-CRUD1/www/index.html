@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operação CRUD01</title>
+</head>
+<body>
+
+    <h2>Operação com CRUD 01</h2>
+
+    <label>Nome:</label>
+    <input type="text" id="nome"><br><br>
+
+    <label>Nota:</label>
+    <input type="text" id="nota"><br><br>
+
+    <button id="btnInserir">Inserir dados</button>
+    <button id="btnLimpar">Limpar campos</button>  
+    <button id="btnAtualizar" onclick="atualizaLinhaTabela()">Atualizar campos</button>  
+
+    <br><br>
+    <table id="table" border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nota</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="resultado">
+           
+        </tbody>
+    </table>    
+
+    <script src="script.js"></script>
+</body>
+</html>
