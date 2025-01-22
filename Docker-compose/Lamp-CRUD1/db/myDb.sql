@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 21/01/2025 às 14:36
+-- Tempo de geração: 22-Jan-2025 às 18:09
 -- Versão do servidor: 5.7.44
--- Versão do PHP: 7.4.15
+-- versão do PHP: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,45 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Person`
+-- Estrutura da tabela `Person`
 --
 
 CREATE TABLE `Person` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `nota` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nome` varchar(30) NOT NULL,
+  `nota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Despejando dados para a tabela `Person`
+-- Extraindo dados da tabela `Person`
 --
 
-INSERT INTO `Person` (`id`, `name`, `nota`) VALUES
-(1, 'William', 10),
-(2, 'Marc', 2),
-(3, 'John', 23),
-(4, 'fabricio', 100),
-(5, 'angiene', 100);
+INSERT INTO `Person` (`id`, `nome`, `nota`) VALUES
+(1, 'Fabrício', 100),
+(2, 'Angiene', 90),
+(3, 'Fabiano', 80),
+(4, 'AndrÃ©ia', 50);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `Person`
+-- Índices para tabela `Person`
 --
 ALTER TABLE `Person`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `Person`
 --
 ALTER TABLE `Person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

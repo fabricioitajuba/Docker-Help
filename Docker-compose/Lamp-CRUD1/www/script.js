@@ -46,7 +46,7 @@ function readBD(){
     fetch("api-read.php", {
         method: "POST"
     }).then(response => response.text()).then(response => {
-        console.log(response);
+        //console.log(response);
         resultado.innerHTML = response;
     })
 
