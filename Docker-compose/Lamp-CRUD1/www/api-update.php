@@ -15,10 +15,8 @@
 
     include_once("conecta.php");
 
-    $sql = "UPDATE Person SET nome='$nome', nota='$nota', WHERE id='$id'";
+    $sql = "UPDATE Person SET nome='$nome', nota='$nota' WHERE Person.id = '$id'";
     $res = mysqli_query($conexao, $sql);
-
-    echo $res;
 
     mysqli_close($conexao);
 

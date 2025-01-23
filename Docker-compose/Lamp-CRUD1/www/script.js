@@ -13,7 +13,9 @@ const btnAtualizar = document.getElementById("btnAtualizar");
 const table = document.getElementById("table");
 const resultado = document.getElementById("resultado");
 
-document.getElementById("btnAtualizar").disabled = true
+document.getElementById("btnAtualizar").disabled = true;
+
+let v1, v2, v3;
 
 readBD();
 
@@ -41,11 +43,12 @@ function limpaCampos(){
     nome.value = ""
     nota.value = ""
     nome.focus()
+    document.getElementById("btnAtualizar").disabled = true;
 }
 
 //Trata o botão Limpar campos
 btnLimpar.addEventListener("click", ()=>{
-    limpaCampos()
+    limpaCampos();
 })
 
 //Função para ler o bando de dados
@@ -63,42 +66,48 @@ function readBD(){
 //Trata o botão Inserir
 btnInserir.addEventListener("click", ()=>{
 
-    let nomex = nome.value;
-    let notax = nota.value;
+    if(confirm("Deseja realmente inserir o registro ?")){
 
-    let dados = {
-        "nome": nomex,
-        "nota": notax
+        let nomex = nome.value;
+        let notax = nota.value;
+    
+        let dados = {
+            "nome": nomex,
+            "nota": notax
+        }
+    
+        if(validaCampos()){
+    
+            fetch("api-create.php", {
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+    
+                "body": JSON.stringify(dados)
+    
+            }).then(function(response){
+                return response.text();
+            }).then(function(data){
+    
+                //console.log(data);
+                
+                if(data == "ok"){
+                    alert("Dados inseridos com sucesso!");
+                    readBD();
+                }
+                else{
+                    alert("Dados não inseridos!");
+                }
+            })
+    
+            //console.log(dados)
+            limpaCampos()
+            document.getElementById("btnAtualizar").disabled = true;
+        }        
+
     }
 
-    if(validaCampos()){
-
-        fetch("api-create.php", {
-            "method": "POST",
-            "headers": {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-
-            "body": JSON.stringify(dados)
-
-        }).then(function(response){
-            return response.text();
-        }).then(function(data){
-
-            //console.log(data);
-            
-            if(data == "ok"){
-                alert("Dados inseridos com sucesso!");
-                readBD();
-            }
-            else{
-                alert("Dados não inseridos!");
-            }
-        })
-
-        //console.log(dados)
-        limpaCampos()
-    }
 })
 
 //Função para deletar uma linha na tabela
@@ -140,26 +149,31 @@ function deletaLinhaTabela(idLinha){
 //Função para editar uma linha da tabela
 function editaLinhaTabela(idx, nomex, notax){
     
-    document.getElementById("nome").innerHTML = nomex;
-    document.getElementById("nota").innerHTML = notax;
+    v1 = idx;
+    v2 = nomex;
+    v3 = notax;
 
-    document.getElementById("btnAtualizar").disabled = false
+    document.getElementById("nome").value = v2;
+    document.getElementById("nota").value = v3;
+
+    document.getElementById("btnAtualizar").disabled = false;
 }
 
-//Trata o botão Inserir
+//Trata o botão Atualizar
 btnAtualizar.addEventListener("click", ()=>{
 
-    if(confirm("Deseja realmente editar o registro " + idLinha + "?")){
+    if(confirm("Deseja realmente editar o registro " + v1 + "?")){
 
-        let idx = idLinha;
-        let nomex = nome.value;
-        let notax = nota.value;
+        v2 = nome.value;
+        v3 = nota.value;
 
         let dados = {
-            "id": idx,
-            "nome": nomex,
-            "nota": notax            
+            "id": v1,
+            "nome": v2,
+            "nota": v3            
         }        
+
+        //console.log(dados);
 
         fetch("api-update.php", {
             "method": "POST",
@@ -176,13 +190,14 @@ btnAtualizar.addEventListener("click", ()=>{
             //console.log(data);
             
             if(data == "ok"){
-                alert("Dados alterados com sucesso!");
                 readBD();
+                limpaCampos();
+                document.getElementById("btnAtualizar").disabled = true;
+                alert("Dados alterados com sucesso!");
             }
             else{
                 alert("Dados não alterados!");
             }
         })               
     }
-
 })

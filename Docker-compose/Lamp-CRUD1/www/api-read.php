@@ -11,7 +11,7 @@
             <td>".$linha['nome']."</td>
             <td>".$linha['nota']."</td>
             <td>              
-                <button onclick='editaLinhaTabela(".$linha['id'].", ".$linha['nome'].", ".$linha['nota'].")'>Editar</button>
+                <button onclick='editaLinhaTabela(".$linha['id'].", \"".$linha['nome']."\", ".$linha['nota'].")'>Editar</button>
                 <button onclick='deletaLinhaTabela(".$linha['id'].")'>Deletar</button>                
             </td>
         </tr>";	
