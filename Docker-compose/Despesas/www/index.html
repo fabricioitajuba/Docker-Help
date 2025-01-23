@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despesas</title>
+</head>
+<body>
+
+    <h2>Operação com CRUD 01</h2>
+
+    <label>Descrição:</label>
+    <input type="text" id="descricao"><br><br>
+
+    <label>Lucro:</label>
+    <input type="number" id="lucro" value="0"><br><br>
+
+    <label>Despesa:</label>
+    <input type="number" id="despesa" value="0"><br><br>
+
+    <label>Procurar:</label>
+    <input type="text" id="procurar">
+    <button id="btnProcurar" onclick="procurarValor()">Procurar</button><br><br>     
+
+    <button id="btnInserir">Inserir dados</button>
+    <button id="btnLimpar">Limpar campos</button>  
+    <button id="btnAtualizar">Atualizar campos</button>
+
+    <br><br>
+    <table id="table" border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data e Hora</th>
+                <th>Descritivo</th>
+                <th>Lucro</th>
+                <th>Despesas</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+           
+        </tbody>
+    </table>    
+    <br>
+    <span>Total de Lucros R$:</span>
+    <span id="totalLucros"></span>
+    <br><br>
+    <span>Total de Despesas R$:</span>
+    <span id="totalDespesas"></span>
+    <br><br>
+    <span>Troco do mês R$:</span>
+    <span id="trocoMes"></span>
+    <br>
+
+    <script src="script.js"></script>
+</body>
+</html>
