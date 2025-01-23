@@ -14,6 +14,7 @@ const btnLimpar = document.getElementById("btnLimpar");
 const btnAtualizar = document.getElementById("btnAtualizar");
 const table = document.getElementById("table");
 const btnProcurar = document.getElementById("btnProcurar");
+const tbody = document.getElementById("tbody");
 
 document.getElementById("btnAtualizar").disabled = true;
 
@@ -51,6 +52,7 @@ function procurarValor(){
     }
 }
 
+
 //Função para validar os dados do formulário
 function validaCampos(){
 
@@ -72,10 +74,10 @@ function validaCampos(){
 }
 
 function limpaCampos(){
-    nome.value = "";
-    nota.value = "";
-    procurar.value = "";
-    nome.focus();
+    nome.value = ""
+    nota.value = ""
+    procurar.value = ""
+    nome.focus()
     document.getElementById("btnAtualizar").disabled = true;
 }
 

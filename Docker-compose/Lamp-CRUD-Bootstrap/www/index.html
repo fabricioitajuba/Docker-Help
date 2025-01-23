@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operação CRUD com Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body class="container" style="background-color: #DEDEDE;">
+
+    <h2>Operação com CRUD e BootStrap</h2>
+
+    <label>Nome:</label>
+    <input type="text" id="nome"><br><br>
+
+    <label>Nota:</label>
+    <input type="text" id="nota"><br><br>
+
+    <label>Procurar:</label>
+    <input type="text" id="procurar">
+    <button id="btnProcurar" onclick="procurarValor()" class="btn btn-primary">Procurar</button><br><br>    
+
+    <button id="btnInserir" class="btn btn-success">Inserir dados</button>
+    <button id="btnLimpar" class="btn btn-light">Limpar campos</button>  
+    <button id="btnAtualizar" class="btn btn-dark">Atualizar campos</button>
+
+    <br><br>
+    <table id="table" border="1" class="table table-hover table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nota</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+           
+        </tbody>
+    </table>    
+
+    <script src="script.js"></script>
+</body>
+</html>
