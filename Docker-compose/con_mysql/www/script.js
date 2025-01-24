@@ -20,7 +20,23 @@ btnListaBD.addEventListener("click", ()=>{
 
 })
 
-function selecionaTabela(opcao){
-    var tabela = opcao.value;
-    console.log(tabela);
+function selecionaBanco(opcao){
+
+    var banco = opcao.value;
+    
+    let dados = {
+        "Banco": banco
+    }    
+   
+    fetch("api-listar-tables.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+    },    
+        "body": JSON.stringify(dados)    
+    }).then(function(response){
+        return response.text();
+    }).then(function(data){                 
+        select2.innerHTML = data;
+    })   
 }
