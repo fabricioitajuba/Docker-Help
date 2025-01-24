@@ -5,6 +5,8 @@ services:
     container_name: apache-php
     restart: always
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./www:/var/www/html/
     ports:
       - "80:80"
@@ -26,6 +28,8 @@ services:
     ports:
       - 3306:3306
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./db:/docker-entrypoint-initdb.d
       - ./db:/etc/mysql/conf.d
       - ./db_vol:/var/lib/mysql

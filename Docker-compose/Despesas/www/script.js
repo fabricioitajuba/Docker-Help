@@ -28,7 +28,11 @@ var total_lucros, total_despesas;
 readBD();
 totalLucro();
 totalDespesa();
-troco();
+
+
+let interval = setInterval(function(){
+    troco();
+}, 500)
 
 //Função para procurar algo na tabela
 function procurarValor(){
@@ -122,7 +126,6 @@ function totalDespesa(){
         total_despesas = response;
         totalDespesas.innerHTML = total_despesas;
     })
-
 }
 
 //Função para calcular o trodo do mês

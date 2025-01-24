@@ -2,19 +2,19 @@
 
     include_once("conecta.php");
 
-	$sql = "SELECT * FROM Janeiro";
+	$sql = "SELECT * FROM Janeiro";  
 	$res = mysqli_query($conexao, $sql);			
 
     while($linha = mysqli_fetch_array($res)){
         echo "<tr>
             <td>".$linha['id']."</td>
-            <td>".$linha['data_hora']."</td>
-            <td>".$linha['Descritivo']."</td>
+            <td>".date("d/m/Y H:i:s", strtotime($linha['data_hora']))."</td>
+            <td><b>".$linha['Descritivo']."</b></td>
             <td>".$linha['Lucro']."</td>
             <td>".$linha['Despesa']."</td>
             <td>              
-                <button onclick='editaLinhaTabela(".$linha['id'].", \"".$linha['Descritivo']."\", ".$linha['Lucro'].", ".$linha['Despesa'].")'>Editar</button>
-                <button onclick='deletaLinhaTabela(".$linha['id'].")'>Deletar</button>                
+                <button onclick='editaLinhaTabela(".$linha['id'].", \"".$linha['Descritivo']."\", ".$linha['Lucro'].", ".$linha['Despesa'].")' class='btn btn-info'>Editar</button>
+                <button onclick='deletaLinhaTabela(".$linha['id'].")' class='btn btn-danger'>Deletar</button>                
             </td>
         </tr>";	
     }
