@@ -13,7 +13,7 @@
             <td>".$linha['Lucro']."</td>
             <td>".$linha['Despesa']."</td>
             <td>              
-                <button onclick='editaLinhaTabela(".$linha['id'].", \"".$linha['Descritivo']."\", ".$linha['Lucro'].", ".$linha['Despesa'].")' class='btn btn-info'>Editar</button>
+                <button onclick='editaLinhaTabela(".$linha['id'].", \"".$linha['Descritivo']."\", ".$linha['Lucro'].", ".$linha['Despesa'].")' class='btn btn-warning'>Editar</button>
                 <button onclick='deletaLinhaTabela(".$linha['id'].")' class='btn btn-danger'>Deletar</button>                
             </td>
         </tr>";	

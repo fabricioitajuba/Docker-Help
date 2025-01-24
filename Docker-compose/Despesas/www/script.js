@@ -70,7 +70,7 @@ function validaCampos(){
     let msg = '';
 
     if(descricao.value == ''){
-        msg += '- Informe o descricao! \n';
+        msg += '- Informe a descricao! \n';
     }
     
     if(msg != ''){
