@@ -15,6 +15,8 @@ const btnAtualizar = document.getElementById("btnAtualizar");
 const table = document.getElementById("table");
 const btnProcurar = document.getElementById("btnProcurar");
 
+const teste = document.getElementById("teste");
+
 document.getElementById("btnAtualizar").disabled = true;
 
 let v1, v2, v3;
@@ -87,12 +89,28 @@ btnLimpar.addEventListener("click", ()=>{
 //Função para ler o bando de dados
 function readBD(){
 
+    var linha;
+
     fetch("api-read.php")
     .then(res=>res.json())
-    .then(dados=>{
-        console.log(dados)
+    .then(ret=>{
+
+        console.log(ret)
+
+        ret.forEach(function(item) {
+            
+            //console.log(item.id)
+            //console.log(item.nome)
+            //console.log(item.nota)
+
+            linha = "<tr> \
+            <td>"+item.id+"</td> \
+            <td>"+item.nome+"</td> \
+            <td>"+item.nota+"</td></tr>";	
+            
+            tbody.innerHTML = linha;
+        });
     })
-    //tbody.innerHTML = response;
 }
 
 //Trata o botão Inserir
