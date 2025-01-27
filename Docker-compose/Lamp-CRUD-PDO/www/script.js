@@ -116,7 +116,7 @@ btnInserir.addEventListener("click", ()=>{
     if(confirm("Deseja realmente inserir o registro ?")){
 
         let nomex = nome.value;
-        let notax = nota.value;
+        let notax = parseInt(nota.value);
     
         let dados = {
             "nome": nomex,
@@ -152,7 +152,7 @@ function deletaLinhaTabela(idLinha){
 
     if(confirm("Deseja realmente apagar o registro " + idLinha + "?")){
 
-        let idx = idLinha;
+        let idx = parseInt(idLinha);
 
         let dados = {
             "id": idx
