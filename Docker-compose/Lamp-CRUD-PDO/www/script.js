@@ -13,9 +13,8 @@ const btnInserir = document.getElementById("btnInserir");
 const btnLimpar = document.getElementById("btnLimpar");
 const btnAtualizar = document.getElementById("btnAtualizar");
 const table = document.getElementById("table");
+const tbody = document.getElementById("tbody");
 const btnProcurar = document.getElementById("btnProcurar");
-
-const teste = document.getElementById("teste");
 
 document.getElementById("btnAtualizar").disabled = true;
 
@@ -89,27 +88,25 @@ btnLimpar.addEventListener("click", ()=>{
 //Função para ler o bando de dados
 function readBD(){
 
-    var linha;
+    var linha = "";
 
     fetch("api-read.php")
     .then(res=>res.json())
     .then(ret=>{
+        //console.log(ret)
+        ret.forEach(function(item){
 
-        console.log(ret)
-
-        ret.forEach(function(item) {
-            
-            //console.log(item.id)
-            //console.log(item.nome)
-            //console.log(item.nota)
-
-            linha = "<tr> \
-            <td>"+item.id+"</td> \
-            <td>"+item.nome+"</td> \
-            <td>"+item.nota+"</td></tr>";	
-            
-            tbody.innerHTML = linha;
+            linha = linha + `<tr>
+                    <td>${item.id}</td>
+                    <td>${item.nome}</td>
+                    <td>${item.nota}</td>
+                    <td>              
+                        <button onclick='editaLinhaTabela(${item.id}, "${item.nome}", ${item.nota})'>Editar</button>
+                        <button onclick='deletaLinhaTabela(${item.id})'>Deletar</button>                
+                    </td>
+                </tr>`;            
         });
+        tbody.innerHTML = linha;
     })
 }
 
@@ -133,21 +130,21 @@ btnInserir.addEventListener("click", ()=>{
                 "headers": {
                     "Content-Type": "application/json; charset=utf-8"
                 },
-    
                 "body": JSON.stringify(dados)
-    
             })
             .then(res=>res.json())
             .then(ret=>{
-                console.log(ret)
-            })
-    
-            limpaCampos()
-            document.getElementById("btnAtualizar").disabled = true;
+
+                if(ret.Status = "ok"){
+                    //console.log(ret)
+                    limpaCampos();
+                    readBD();
+                    document.getElementById("btnAtualizar").disabled = true;
+                    alert("Dados inseridos com sucesso!");
+                }
+            })   
         }        
-
     }
-
 })
 
 //Função para deletar uma linha na tabela
@@ -166,15 +163,16 @@ function deletaLinhaTabela(idLinha){
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
             },
-
             "body": JSON.stringify(dados)
-
         })
         .then(res=> res.json())
         .then(ret=>{
-            console.log(ret);          
-            alert("Dados deletados com sucesso!");
-            readBD();
+
+            if(ret.Status = "ok"){
+                //console.log(ret);          
+                readBD();
+                alert("Dados deletados com sucesso!");
+            }
         })               
     }
 }
@@ -198,7 +196,7 @@ btnAtualizar.addEventListener("click", ()=>{
     if(confirm("Deseja realmente editar o registro " + v1 + "?")){
 
         v2 = nome.value;
-        v3 = nota.value;
+        v3 = parseInt(nota.value);
 
         let dados = {
             "id": v1,
@@ -211,17 +209,17 @@ btnAtualizar.addEventListener("click", ()=>{
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
             },
-
             "body": JSON.stringify(dados)
-
         })
         .then(res => res.json())
         .then(ret=>{
-            console.log(ret);            
-            readBD();
-            limpaCampos();
-            document.getElementById("btnAtualizar").disabled = true;
-            alert("Dados alterados com sucesso!");
+            
+            if(ret.Status = "ok"){
+                readBD();
+                limpaCampos();
+                document.getElementById("btnAtualizar").disabled = true;
+                alert("Dados alterados com sucesso!");
+            }         
         })               
     }
 })

@@ -8,7 +8,7 @@
   //echo json_encode($obj);
 
   try{
-    $stmt = $conn->prepare("UPDATE Person SET nome = :nome, nota = :nota WHERE Person.id = :id'");
+    $stmt = $conn->prepare("UPDATE Person SET nome = :nome, nota = :nota WHERE id = :id");
     $stmt->execute($obj);
 
     echo json_encode(["Status" => "ok"]);
