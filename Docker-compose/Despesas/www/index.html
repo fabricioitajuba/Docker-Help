@@ -11,31 +11,23 @@
 
     <h2>Operação com CRUD 01</h2>
 
-    <form>
-        <div class="div1">
-            <label class="form-label">Descrição:</label>
-            <input type="text" class="form-control" id="descricao">
-        </div>
-        <div class="div1">
-            <label class="form-label">Lucro:</label>
-            <input type="number" class="form-control" id="lucro" value="0">
-        </div>
-        <div class="div1">
-            <label>Despesa:</label>
-            <input type="number" class="form-control" id="despesa" value="0">
-        </div>
-        <div class="div2">
-            <label>Procurar:</label>
-            <input type="text" id="procurar">
-            <button id="btnProcurar" class="btn btn-primary" onclick="procurarValor()">Procurar</button>             
-        </div>        
-        <div class="div2">
-            <button id="btnInserir" class="btn btn-success">Inserir dados</button>
-            <button id="btnLimpar" class="btn btn-light">Limpar campos</button>  
-            <button id="btnAtualizar" class="btn btn-dark">Atualizar campos</button>
-        </div>
-    </form>
+    <label class="form-label">Descrição:</label>
+    <input type="text" class="form-control" id="descricao">
 
+    <label class="form-label">Lucro:</label>
+    <input type="number" class="form-control" id="lucro" value="0">
+
+    <label>Despesa:</label>
+    <input type="number" class="form-control" id="despesa" value="0">
+    <br><br>
+    <label>Procurar:</label>
+    <input type="text" id="procurar">
+    <button id="btnProcurar" class="btn btn-primary" onclick="procurarValor()">Procurar</button>             
+    <br><br>
+    <button id="btnInserir" class="btn btn-success">Inserir dados</button>
+    <button id="btnLimpar" class="btn btn-light">Limpar campos</button>  
+    <button id="btnAtualizar" class="btn btn-dark">Atualizar campos</button>
+    <br><br>
     <table id="table" border="1" class="table table-hover table-striped">
 
         <thead class="table-dark">

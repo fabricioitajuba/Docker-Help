@@ -97,10 +97,27 @@ btnLimpar.addEventListener("click", ()=>{
 //Função para ler o bando de dados
 function readBD(){
 
-    fetch("api-read.php", {
-        method: "POST"
-    }).then(response => response.text()).then(response => {
-        tbody.innerHTML = response;
+    var linha = "";
+
+    fetch("api-read.php")
+    .then(res=>res.json())
+    .then(ret=>{
+
+        ret.forEach(function(item){ 
+                
+            linha = linha + `<tr>
+                <td>${item.id}</td>
+                <td>${item.data_hora}</td>
+                <td><b>${item.Descritivo}</b></td>
+                <td>${item.Lucro}</td>
+                <td>${item.Despesa}</td>
+                <td>              
+                    <button onclick='editaLinhaTabela(${item.id}, "${item.Descritivo}", ${item.Lucro}, ${item.Despesa})' class='btn btn-warning'>Editar</button>
+                    <button onclick='deletaLinhaTabela(${item.id})' class='btn btn-danger'>Deletar</button>                
+                </td>
+            </tr>`;
+        });
+        tbody.innerHTML = linha;
     })
 
 }
@@ -108,30 +125,29 @@ function readBD(){
 //Função para calcular o total de lucro
 function totalLucro(){
 
-    fetch("api-totalLucro.php", {
-        method: "POST"
-    }).then(response => response.text()).then(response => {
-        total_lucros = response;
-        totalLucros.innerHTML = total_lucros;
+    fetch("api-totalLucro.php")
+    .then(res=>res.json())
+    .then(ret=>{
+        total_Lucros = parseFloat(ret.Lucro).toFixed(2);
+        totalLucros.innerHTML = total_Lucros.toString().replace(".", ",");
     })
-
 }
 
 //Função para calcular o total de despesas
 function totalDespesa(){
-
-    fetch("api-totalDespesa.php", {
-        method: "POST"
-    }).then(response => response.text()).then(response => {
-        total_despesas = response;
-        totalDespesas.innerHTML = total_despesas;
+    
+    fetch("api-totalDespesa.php")
+    .then(res=>res.json())
+    .then(ret=>{
+        total_Despesas = parseFloat(ret.Despesas).toFixed(2);
+        totalDespesas.innerHTML = total_Despesas.toString().replace(".", ",");
     })
 }
 
 //Função para calcular o trodo do mês
 function troco(){
-    var trocox = total_lucros - total_despesas;  
-    trocoMes.innerHTML = trocox;     
+    var trocox = parseFloat(total_Lucros - total_Despesas).toFixed(2);  
+    trocoMes.innerHTML = trocox.toString().replace(".", ",");     
 }
 
 //Trata o botão Inserir
@@ -139,18 +155,16 @@ btnInserir.addEventListener("click", ()=>{
 
     if(confirm("Deseja realmente inserir o registro ?")){
 
-        let descricaox = descricao.value;
-        let lucrox = lucro.value;
-        let despesax = despesa.value;
+        let descritivox = descricao.value;
+        let lucrox = parseFloat(lucro.value);
+        let despesax = parseFloat(despesa.value);
     
         let dados = {
-            "descricao": descricaox,
+            "descritivo": descritivox,
             "lucro": lucrox,
             "despesa": despesax
         }
-
-        //console.log(dados);
-        
+     
         if(validaCampos()){
     
             fetch("api-create.php", {
@@ -161,27 +175,24 @@ btnInserir.addEventListener("click", ()=>{
     
                 "body": JSON.stringify(dados)
     
-            }).then(function(response){
-                return response.text();
-            }).then(function(data){
-    
-                //console.log(data);
-                
-                if(data == "ok"){
-                    alert("Dados inseridos com sucesso!");
+            })
+            .then(res=>res.json())
+            .then(ret=>{
+                //console.log(ret);
+                if(ret.Status == "ok"){
                     readBD();
                     totalLucro();
                     totalDespesa();
                     troco();
+                    limpaCampos()
+                    document.getElementById("btnAtualizar").disabled = true;
+                    alert("Dados inseridos com sucesso!");
                 }
                 else{
                     alert("Dados não inseridos!");
                 }
             })
-    
-            //console.log(dados)
-            limpaCampos()
-            document.getElementById("btnAtualizar").disabled = true;
+   
         }        
 
     }
@@ -193,7 +204,7 @@ function deletaLinhaTabela(idLinha){
 
     if(confirm("Deseja realmente apagar o registro " + idLinha + "?")){
 
-        let idx = idLinha;
+        let idx = parseInt(idLinha);
 
         let dados = {
             "id": idx
@@ -204,16 +215,12 @@ function deletaLinhaTabela(idLinha){
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
             },
-
             "body": JSON.stringify(dados)
-
-        }).then(function(response){
-            return response.text();
-        }).then(function(data){
-
-            //console.log(data);
-            
-            if(data == "ok"){
+        })
+        .then(res=>res.json())
+        .then(ret=>{
+          
+            if(ret.Status == "ok"){
                 alert("Dados deletados com sucesso!");
                 readBD();
                 totalLucro();
@@ -248,8 +255,8 @@ btnAtualizar.addEventListener("click", ()=>{
     if(confirm("Deseja realmente editar o registro " + v1 + "?")){
 
         v2 = descricao.value;
-        v3 = lucro.value;
-        v4 = despesa.value;
+        v3 = parseFloat(lucro.value);
+        v4 = parseFloat(despesa.value);
 
         let dados = {
             "id": v1,
@@ -258,23 +265,17 @@ btnAtualizar.addEventListener("click", ()=>{
             "despesa": v4            
         }        
 
-        //console.log(dados);
-
         fetch("api-update.php", {
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
             },
-
             "body": JSON.stringify(dados)
+        })
+        .then(res=>res.json())
+        .then(ret=>{
 
-        }).then(function(response){
-            return response.text();
-        }).then(function(data){
-
-            //console.log(data);
-            
-            if(data == "ok"){
+            if(ret.Status == "ok"){
                 readBD();
                 totalLucro();
                 totalDespesa();

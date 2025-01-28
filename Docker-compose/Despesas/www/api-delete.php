@@ -1,20 +1,20 @@
 <?php
-  //print_r($_POST);
-  if(isset($_POST)){
 
-    $data = file_get_contents("php://input");
-    $data = json_decode($data, true); //return a php array
-    
-    $id = $data["id"];
+  require 'conecta.php';
 
-    include_once("conecta.php");
+  $json_str = file_get_contents("php://input");
+  $obj = json_decode($json_str, true);
 
-    $sql = "DELETE FROM Janeiro WHERE id='$id'";
-    $res = mysqli_query($conexao, $sql);
+  //echo json_encode($obj);
 
-    mysqli_close($conexao);
+  try{
+    $stmt = $conn->prepare("DELETE FROM Janeiro WHERE id = :id");
+    $stmt->execute($obj);
 
-    echo "ok";
+    echo json_encode(["Status" => "ok"]);
+  }
+  catch(PDOException $e){
+        echo json_encode(['error' => $e->getMessage()]);
   }
 
 ?>

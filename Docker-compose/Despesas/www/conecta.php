@@ -1,19 +1,27 @@
 <?php
 
 	//Conexao com o bando de dados
-	$servidor = "db";
-	$usuario = "admin";
-	$senha = "pass";
-	$dbname = "ANO2025";
-	
-	//Criar a conexao
-	$conexao = mysqli_connect($servidor, $usuario, $senha, $dbname);
-	
-	if($conexao){
-		//echo "Conexao realizada com sucesso";		
-	}else{
-		die("Falha na conexao: " . mysqli_connect_error());
+
+	$host = 'db';
+	$port = 3306;
+	$user = 'root';
+	$pass = 'pass';
+	$db = 'ANO2025';
+
+	try{
+		$conn = new PDO("mysql:host=$host; port=$port; dbname=$db; charset=utf8", $user, $pass);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
+	catch(PDOException $e){
+		//Erros relacionados ao banco de dados
+		echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+		exit;
+	}
+	catch(Exception $e){
+		//Erros não relacionados ao banco de dados
+		echo 'Erro: ' . $e->getMessage();
+		exit;
+	}		
 	//Fim da conexao
 
 ?>

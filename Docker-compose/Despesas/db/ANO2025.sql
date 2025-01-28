@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 23-Jan-2025 às 18:34
+-- Tempo de geração: 28-Jan-2025 às 16:38
 -- Versão do servidor: 5.7.44
 -- versão do PHP: 7.4.15
 
@@ -31,8 +31,8 @@ CREATE TABLE `Janeiro` (
   `id` int(11) NOT NULL,
   `data_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Descritivo` varchar(30) NOT NULL,
-  `Lucro` int(11) DEFAULT NULL,
-  `Despesa` int(11) DEFAULT NULL
+  `Lucro` float DEFAULT NULL,
+  `Despesa` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relação de gastos do mês de Janeiro de 2025';
 
 --
@@ -53,7 +53,7 @@ ALTER TABLE `Janeiro`
 -- AUTO_INCREMENT de tabela `Janeiro`
 --
 ALTER TABLE `Janeiro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

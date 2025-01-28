@@ -1,23 +1,20 @@
 <?php
-  //print_r($_POST);
-  if(isset($_POST)){
 
-    $data = file_get_contents("php://input");
-    $data = json_decode($data, true); //return a php array
-    
-    $id = $data["id"];
-    $descricao = $data["descricao"];
-    $lucro = $data["lucro"];
-    $despesa = $data["despesa"];
+  require 'conecta.php';
 
-    include_once("conecta.php");
+  $json_str = file_get_contents("php://input");
+  $obj = json_decode($json_str, true);
 
-    $sql = "UPDATE Janeiro SET Descritivo='$descricao', Lucro='$lucro', Despesa='$despesa' WHERE Janeiro.id = '$id'";
-    $res = mysqli_query($conexao, $sql);
+  //echo json_encode($obj);
 
-    mysqli_close($conexao);
+  try{
+    $stmt = $conn->prepare("UPDATE Janeiro SET Descritivo = :descricao, Lucro = :lucro, Despesa = :despesa WHERE id = :id");
+    $stmt->execute($obj);
 
-    echo "ok";
+    echo json_encode(["Status" => "ok"]);
   }
+  catch(PDOException $e){
+        echo json_encode(['error' => $e->getMessage()]);
+  }  
 
 ?>
