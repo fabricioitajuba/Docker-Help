@@ -31,6 +31,7 @@ var banco = "ANO2025";
 tbody.innerHTML = "";
 totalLucros.innerHTML = "";
 totalDespesas.innerHTML = "";
+trocoMes.innerHTML = "";
 
 verificaMeses();
 
@@ -133,6 +134,7 @@ function readMes(mesSelecionado){
         tbody.innerHTML = "";
         totalLucros.innerHTML = "";
         totalDespesas.innerHTML = "";
+        trocoMes.innerHTML = "";
     }
     else{
         readBD();
