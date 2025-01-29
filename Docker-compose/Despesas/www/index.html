@@ -5,29 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Despesas</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style.css">    
+
 </head>
 <body class="container" style="background-color: #DEDEDE;">
 
     <h2>Operação com CRUD 01</h2>
 
-    <label class="form-label">Descrição:</label>
-    <input type="text" class="form-control" id="descricao">
+    <div class="div1">
+        <label class="form-label">Descrição:</label>
+        <input type="text" class="form-control" id="descricao">
 
-    <label class="form-label">Lucro:</label>
-    <input type="number" class="form-control" id="lucro" value="0">
+        <label class="form-label">Lucro:</label>
+        <input type="number" class="form-control" id="lucro" value="0" style="text-align: right;">
 
-    <label>Despesa:</label>
-    <input type="number" class="form-control" id="despesa" value="0">
-    <br><br>
-    <label>Procurar:</label>
-    <input type="text" id="procurar">
-    <button id="btnProcurar" class="btn btn-primary" onclick="procurarValor()">Procurar</button>             
-    <br><br>
-    <button id="btnInserir" class="btn btn-success">Inserir dados</button>
-    <button id="btnLimpar" class="btn btn-light">Limpar campos</button>  
-    <button id="btnAtualizar" class="btn btn-dark">Atualizar campos</button>
-    <br><br>
+        <label>Despesa:</label>
+        <input type="number" class="form-control" id="despesa" value="0" style="text-align: right;">
+    </div>
+    <br>
+    <div class="div2">
+        <button id="btnInserir" class="btn btn-success">Inserir dados</button>
+        <button id="btnLimpar" class="btn btn-light">Limpar campos</button>  
+        <button id="btnAtualizar" class="btn btn-dark">Atualizar campos</button>  
+        <br><br>
+        <label>Procurar:</label>
+        <input type="text" id="procurar">
+        <button id="btnProcurar" class="btn btn-primary" onclick="procurarValor()">Procurar</button>                   
+    </div>
+    <div class="div3">
+        <br>
+        <label>Mêses cadastrados:</label>
+        <select id="optMes" onchange="readMes(this)" class="form-select" aria-label="Default select example" style="border: 2px solid black; width: 150px">
+        </select>
+    </div>
+    <br>
     <table id="table" border="1" class="table table-hover table-striped">
 
         <thead class="table-dark">

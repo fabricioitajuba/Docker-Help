@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 28-Jan-2025 às 16:57
+-- Tempo de geração: 29-Jan-2025 às 19:29
 -- Versão do servidor: 5.7.44
 -- versão do PHP: 7.4.15
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `Fevereiro`
+--
+
+CREATE TABLE `Fevereiro` (
+  `id` int(11) NOT NULL,
+  `data_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Descritivo` varchar(30) NOT NULL,
+  `Lucro` float DEFAULT NULL,
+  `Despesa` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `Janeiro`
 --
 
@@ -40,6 +54,12 @@ CREATE TABLE `Janeiro` (
 --
 
 --
+-- Índices para tabela `Fevereiro`
+--
+ALTER TABLE `Fevereiro`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `Janeiro`
 --
 ALTER TABLE `Janeiro`
@@ -50,10 +70,16 @@ ALTER TABLE `Janeiro`
 --
 
 --
+-- AUTO_INCREMENT de tabela `Fevereiro`
+--
+ALTER TABLE `Fevereiro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de tabela `Janeiro`
 --
 ALTER TABLE `Janeiro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

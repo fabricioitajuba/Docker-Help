@@ -1,7 +1,7 @@
 /**
  * Operações CRUD simples
  * Autor: Fabrício de Lima Ribeiro
- * Data: 14/06/24
+ * Data: 28/01/25
  * Status: Concluído
  */
 
@@ -13,6 +13,7 @@ const trocoMes = document.getElementById('trocoMes');
 
 const totalLucros = document.getElementById('totalLucros');
 const totalDespesas = document.getElementById('totalDespesas');
+const optMes = document.getElementById('optMes');
 
 const btnInserir = document.getElementById("btnInserir");
 const btnLimpar = document.getElementById("btnLimpar");
@@ -21,18 +22,46 @@ const table = document.getElementById("table");
 const btnProcurar = document.getElementById("btnProcurar");
 
 document.getElementById("btnAtualizar").disabled = true;
+document.getElementById("btnInserir").disabled = true;
 
-let v1, v2, v3, v4;
-var total_lucros, total_despesas;
+let v1;
+var total_lucros, total_despesas, total_troco, Mes;
+var banco = "ANO2025";
 
-readBD();
-totalLucro();
-totalDespesa();
+tbody.innerHTML = "";
+totalLucros.innerHTML = "";
+totalDespesas.innerHTML = "";
 
+verificaMeses();
 
-let interval = setInterval(function(){
+/*let interval = setInterval(function(){
     troco();
-}, 500)
+}, 500)*/
+
+//Verifica quais meses estão cadastrados
+function verificaMeses(){
+
+    var linha = `<option value="Selecione">Selecione</option>`;
+
+    let dados = {
+        comando: `SELECT TABLE_NAME AS Mes FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${banco}'`
+    }        
+
+    fetch("api-query-read.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(dados)
+    }) 
+    .then(res=>res.json())
+    .then(ret=>{   
+        ret.forEach(function(item){
+           linha = linha + `<option value=${item.Mes}>${item.Mes}</option>`; 
+        })
+        optMes.innerHTML = linha;
+    }) 
+}
 
 //Função para procurar algo na tabela
 function procurarValor(){
@@ -94,80 +123,141 @@ btnLimpar.addEventListener("click", ()=>{
     limpaCampos();
 })
 
+//Função que lê o mês selecionado
+function readMes(mesSelecionado){
+
+    Mes = mesSelecionado.value;
+
+    if(Mes == "Selecione"){
+        document.getElementById("btnInserir").disabled = true;
+        tbody.innerHTML = "";
+        totalLucros.innerHTML = "";
+        totalDespesas.innerHTML = "";
+    }
+    else{
+        readBD();
+        totalLucro();
+        totalDespesa();
+        troco();
+        document.getElementById("btnInserir").disabled = false;
+    }
+}
+
 //Função para ler o bando de dados
 function readBD(){
 
     var linha = "";
 
-    fetch("api-read.php")
+    let dados = {
+        comando: `SELECT * FROM ${Mes}`
+    }        
+
+    fetch("api-query-read.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(dados)
+    })    
     .then(res=>res.json())
     .then(ret=>{
-
+        //console.log(ret);
         ret.forEach(function(item){ 
                 
             linha = linha + `<tr>
                 <td>${item.id}</td>
                 <td>${item.data_hora}</td>
                 <td><b>${item.Descritivo}</b></td>
-                <td>${item.Lucro}</td>
-                <td>${item.Despesa}</td>
+                <td>${item.Lucro.toString().replace(".", ",")}</td>
+                <td>${item.Despesa.toString().replace(".", ",")}</td>
                 <td>              
-                    <button onclick='editaLinhaTabela(${item.id}, "${item.Descritivo}", ${item.Lucro}, ${item.Despesa})' class='btn btn-warning'>Editar</button>
+                    <button onclick='editaLinhaTabela(${item.id}, "${item.Descritivo}", ${item.Lucro}, ${item.Despesa.toString()})' class='btn btn-warning'>Editar</button>
                     <button onclick='deletaLinhaTabela(${item.id})' class='btn btn-danger'>Deletar</button>                
                 </td>
             </tr>`;
         });
         tbody.innerHTML = linha;
     })
-
 }
 
 //Função para calcular o total de lucro
 function totalLucro(){
 
-    fetch("api-totalLucro.php")
+    let dados = {
+        comando: `SELECT SUM(Lucro) AS Lucro FROM ${Mes}`
+    }        
+
+    fetch("api-query-read.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(dados)
+    })     
     .then(res=>res.json())
     .then(ret=>{
-        total_Lucros = parseFloat(ret.Lucro).toFixed(2);
-        totalLucros.innerHTML = total_Lucros.toString().replace(".", ",");
+        total_lucros = parseFloat(ret[0].Lucro).toFixed(2);
+        totalLucros.innerHTML = total_lucros.toString().replace(".", ",");
     })
 }
 
 //Função para calcular o total de despesas
 function totalDespesa(){
     
-    fetch("api-totalDespesa.php")
+    let dados = {
+        comando: `SELECT SUM(Despesa) AS Despesas FROM ${Mes}`
+    }        
+
+    fetch("api-query-read.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(dados)
+    }) 
     .then(res=>res.json())
     .then(ret=>{
-        total_Despesas = parseFloat(ret.Despesas).toFixed(2);
-        totalDespesas.innerHTML = total_Despesas.toString().replace(".", ",");
+        total_despesas = parseFloat(ret[0].Despesas).toFixed(2);
+        totalDespesas.innerHTML = total_despesas.toString().replace(".", ",");
     })
 }
 
 //Função para calcular o trodo do mês
 function troco(){
-    var trocox = parseFloat(total_Lucros - total_Despesas).toFixed(2);  
-    trocoMes.innerHTML = trocox.toString().replace(".", ",");     
+
+    //var trocox = parseFloat(total_lucros - total_despesas).toFixed(2);  
+    //trocoMes.innerHTML = trocox.toString().replace(".", ",");
+
+    let dados = {
+        comando: `SELECT (SUM(Lucro) - SUM(Despesa)) AS troco FROM ${Mes}`
+    }        
+
+    fetch("api-query-read.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(dados)
+    }) 
+    .then(res=>res.json())
+    .then(ret=>{
+        total_troco = parseFloat(ret[0].troco).toFixed(2);
+        trocoMes.innerHTML = total_troco.toString().replace(".", ",");
+    })    
 }
 
 //Trata o botão Inserir
 btnInserir.addEventListener("click", ()=>{
 
     if(confirm("Deseja realmente inserir o registro ?")){
-
-        let descritivox = descricao.value;
-        let lucrox = parseFloat(lucro.value);
-        let despesax = parseFloat(despesa.value);
-    
+   
         let dados = {
-            "descritivo": descritivox,
-            "lucro": lucrox,
-            "despesa": despesax
+            comando: `INSERT INTO ${Mes}(Descritivo, Lucro, Despesa) VALUES ('${descricao.value}', ${parseFloat(lucro.value)}, ${parseFloat(despesa.value)})`
         }
-     
+
         if(validaCampos()){
     
-            fetch("api-create.php", {
+            fetch("api-query-write.php", {
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json; charset=utf-8"
@@ -192,11 +282,8 @@ btnInserir.addEventListener("click", ()=>{
                     alert("Dados não inseridos!");
                 }
             })
-   
         }        
-
     }
-
 })
 
 //Função para deletar uma linha na tabela
@@ -204,13 +291,11 @@ function deletaLinhaTabela(idLinha){
 
     if(confirm("Deseja realmente apagar o registro " + idLinha + "?")){
 
-        let idx = parseInt(idLinha);
-
         let dados = {
-            "id": idx
+            comando: `DELETE FROM ${Mes} WHERE id = ${parseInt(idLinha)}`
         }        
 
-        fetch("api-delete.php", {
+        fetch("api-query-write.php", {
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
@@ -238,13 +323,10 @@ function deletaLinhaTabela(idLinha){
 function editaLinhaTabela(idx, descricaox, lucrox, despesax){
     
     v1 = idx;
-    v2 = descricaox;
-    v3 = lucrox;
-    v4 = despesax;
 
-    document.getElementById("descricao").value = v2;
-    document.getElementById("lucro").value = v3;
-    document.getElementById("despesa").value = v4;
+    document.getElementById("descricao").value = descricaox;
+    document.getElementById("lucro").value = lucrox;
+    document.getElementById("despesa").value = despesax;
 
     document.getElementById("btnAtualizar").disabled = false;
 }
@@ -254,18 +336,11 @@ btnAtualizar.addEventListener("click", ()=>{
 
     if(confirm("Deseja realmente editar o registro " + v1 + "?")){
 
-        v2 = descricao.value;
-        v3 = parseFloat(lucro.value);
-        v4 = parseFloat(despesa.value);
-
         let dados = {
-            "id": v1,
-            "descricao": v2,
-            "lucro": v3,            
-            "despesa": v4            
+            comando: `UPDATE ${Mes} SET Descritivo = '${descricao.value}', Lucro = ${lucro.value}, Despesa = ${despesa.value} WHERE id = ${v1}`           
         }        
 
-        fetch("api-update.php", {
+        fetch("api-query-write.php", {
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json; charset=utf-8"
