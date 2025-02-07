@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increver</title>
+</head>
+<body>
+    <h2>Increver</h2>
+    <form id="form2">
+        <label>Login:</label>
+        <input type="text" name="login" id="txt_login" autocomplete="on">
+        <br>
+        <label>Senha:</label>
+        <input type="password" name="senha1" id="txt_senha1" autocomplete="on">      
+        <img src="./img/eye-fill.svg" id="btn_senha1" onclick="mostrarSenha1()">
+        <br>
+        <label>Confirme a Senha:</label>
+        <input type="password" name="senha2" id="txt_senha2" autocomplete="on">      
+        <img src="./img/eye-fill.svg" id="btn_senha2" onclick="mostrarSenha2()">        
+        <br>
+        <br>
+        <button type="submit">CADASTRAR</button>
+        <span id="resultado"></span>
+    </form>    
+    <br>
+    <a href="index.php"><button>Retornar</button></a>
+    
+    <script src="inscrever.js"></script> 
+</body>
+</html>
