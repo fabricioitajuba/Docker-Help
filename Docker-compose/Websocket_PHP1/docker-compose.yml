@@ -1,0 +1,6 @@
+services:
+  app:
+    image: fabricioitajuba/php-swoole
+    container_name: php-swoole
+    ports:
+      - 80:9501
