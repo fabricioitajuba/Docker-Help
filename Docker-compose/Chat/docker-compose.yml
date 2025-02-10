@@ -1,0 +1,29 @@
+services:
+
+  app:
+    image: openswoole/swoole
+    container_name: chat-server
+    restart: always
+    environment:
+      AUTORELOAD_PROGRAMS: "swoole"
+      AUTORELOAD_ANY_FILES: 0
+    ports:
+      - 9501:9501
+    volumes:
+      - ./server:/var/www
+    links:
+      - web
+    networks:
+      - default      
+
+  web:
+    image: httpd:latest
+    container_name: Apache
+    restart: always
+    volumes:
+      - ./www:/usr/local/apache2/htdocs/
+    ports:
+      - "80:80"
+    networks:
+      - default
+
