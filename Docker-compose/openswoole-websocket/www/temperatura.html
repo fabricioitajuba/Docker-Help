@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket client 1</title>
+</head>
+<body>
+
+    <h2>WebSocket - Client</h2>
+
+    <label>Status:</label>
+    <label id="status">Desconectado!</label>
+    <br><br>
+    <label>Temperatura: </label>
+    <input type="text" name="temperatura" id="temperatura" size="5" value="30">
+    <label>&ordm;C</label>
+    <button onclick="enviaTemperatura()">Enviar</button>
+
+    <Script>
+        const status = document.getElementById('status');
+        const temperatura = document.getElementById('temperatura');
+        const ws = new WebSocket('ws://localhost:9502');
+
+        //Verifica a conexão
+        ws.addEventListener('open', message =>{
+
+            if(message.type === 'open'){
+                status.innerHTML = "Conectado";
+            }
+        });
+
+        //Envia a temperatura
+        function enviaTemperatura(){
+            const dado = {"Temperatura": temperatura.value};
+            ws.send(JSON.stringify(dado));
+        }
+    </Script>
+</body>
+</html>

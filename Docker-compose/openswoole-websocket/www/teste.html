@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+</head>
+<body>
+
+    <h2>Teste WebSocket</h2>
+    <div>
+        <form id="message-form">
+            <div>
+                <input type="text" name="" id="message-box" placeholder="Digite a mensagem...">
+            </div>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div>
+        <ul id="output"></ul>
+    </div>
+
+    <script>
+        (function(){
+            var app = {
+
+                ws: null,
+
+                config: {
+                    uri: 'ws://127.0.0.1',
+                    port: 9502,
+                },
+                init: () => {
+                    app.connecToServer();
+                    app.listenEvents();
+                },
+                listenEvents: () => {
+                    document.getElementById('message-form').addEventListener("submit", app.handleFormSubmit, false);
+                },
+                connecToServer: () => {
+
+                    var wsServer = app.config.uri + ':' + app.config.port;
+                    app.ws = new WebSocket(wsServer);
+
+                    app.ws.onopen = function(evt){
+                        console.log("Conectado ao Servidor WebSocket!");
+                    }
+                    app.ws.onclose = function(evt){
+                        console.log("Desconectado ao Servidor WebSocket!");
+                    }
+                    app.ws.onmessage = function(evt){
+                        console.log("Recebido o dado do servidor: " + evt.data);
+                        app.handleIncomingMessage(evt.data);
+                    }
+                    app.ws.onerror = function(evt){
+                        console.log("Erro ocorrido: " + evt.data);
+                    }                                                            
+                },
+                handleFormSubmit: (e) => {
+                    e.preventDefault();
+                    app.ws.send(JSON.stringify("Dado:" + document.getElementById('message-box').value));
+                },
+                handleIncomingMessage: (data) => {
+                    let input = document.createElement("li");
+                    input.innerText = data;
+                    document.getElementById('output').appendChild(input);
+                },
+            };
+            app.init();
+        })();
+
+    </script>
+</body>
+</html>

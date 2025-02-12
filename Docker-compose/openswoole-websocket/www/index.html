@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisório</title>
+</head>
+<body>
+
+    <h2>Supervisório</h2>
+
+    <label>Status:</label>
+    <label id="status">Desconectado</label>
+    <br><br>
+    <label>Temperatura:</label>
+    <label id="temperatura">-</label>
+    <label>&ordm;C</label>
+    <br><br>
+    <label>Pressão:</label>
+    <label id="pressao">-</label>
+    <label>atm</label>
+    <br><br>
+    <label>Hora:</label>
+    <label id="hora">-</label>
+    <script>
+        const status = document.getElementById('status');
+        const temperatura = document.getElementById('temperatura');
+        const pressao = document.getElementById('pressao');
+        const hora = document.getElementById('hora');
+
+        const ws = new WebSocket("ws://localhost:9502");
+
+        //Verifica a conexão
+        ws.addEventListener('open', message =>{
+
+            if(message.type === 'open'){
+                status.innerHTML = "Conectado";
+            }
+            else{
+                status.innerHTML = "Desconectado";
+            }
+        });
+
+        //Recebe o dado temperatura
+        ws.addEventListener('message', message =>{
+
+            var dado = JSON.parse(message.data);
+
+            if(dado.Temperatura){
+                temperatura.innerHTML = dado.Temperatura;
+            }
+            else if(dado.Pressao){
+                pressao.innerHTML = dado.Pressao;
+            }            
+            else if(dado.Hora){
+                hora.innerHTML = dado.Hora;
+            }              
+        });      
+
+    </script>
+</body>
+</html>
