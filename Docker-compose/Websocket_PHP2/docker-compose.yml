@@ -1,6 +1,0 @@
-services:
-  app:
-    image: fabricioitajuba/swoole-chat
-    container_name: swoole-chat
-    ports:
-      - 80:9501
