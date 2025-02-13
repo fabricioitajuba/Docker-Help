@@ -1,0 +1,67 @@
+Influxdb
+
+- Para verificar se o influxdb está funcionando, abra o navegador e acesse a url:
+http://localhost:8086/query
+
+
+-- Trabalhando com o influx
+
+- Acesse o container do influx:
+$ docker exec -it influxdb_container sh
+
+- Acesse o banco de dados:
+# influx
+
+- Para mostrar os banco de dados criados:
+> show databases
+
+- Para criar um banco de dados (ex):
+> create database mysampledb
+
+- Para usar o banco de dados:
+> use mysampledb
+
+- Para mostrar as tabelas do banco:
+> show measurements
+
+- Para inserir os dados "serverA" e "10" nos campos "host" e "value" na tabela "cpu":
+> INSERT cpu,host=serverA value=10
+
+- Inserir vários outros dados:
+> insert cpu,host=serverA value=8
+> insert cpu,host=serverA value=6
+> insert cpu,host=serverA value=3
+> insert cpu,host=serverA value=10
+> insert cpu,host=serverA value=10
+
+outro exemplo:
+> insert demo,host=serverA,region=us_west value=1.64
+
+- Para visualizar todos os campos inseridos:
+> select * from cpu
+
+- Para ver os campos da tabela (não mostra value):
+> show tag keys from "cpu"
+
+- Para saber o tipo de valor em "value"
+> show field keys from "cpu"
+
+- Para mostrar todos os campos da coluna "host":
+> show tag values from "cpu" with key in ("host")
+
+
+-- O banco de dados também pode ser usado por uma interface HTTP, sendo possível criar, excluir, escrever, modificar, entre outras operações, com uma base de dados.
+
+Por exemplo:
+
+Sendo o InfluxDB acessível no localhost pela porta 8086, com o comando:
+
+curl -i -XPOST http://localhost:8086/query –data-urlencode “q=CREATE DATABASE serverdoin”
+
+Cria-se uma base de dados chamada “serverdoin”.
+
+Para escrever algo nesta base de dados, utiliza-se o comando:
+
+curl -i -XPOST ‘http://localhost:8086/write?db=serverdoin’ –data-binary ‘catraca,local=portaria,posicao=frente’
+
+Onde criamos uma tabela chamada “catraca” que tem as propriedades “local” e “posicao”.
