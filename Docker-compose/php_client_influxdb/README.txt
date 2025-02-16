@@ -1,5 +1,7 @@
 Apache com PHP client para trabalhar com influxdb
 
+No computador, instalar o PHP 7.4 e também o composer
+
 -Para construir a imagem do apache com php client para o influxdb:
 $ docker build -t fabricioitajuba/apache-phpclient-influxdb:latest .
 
