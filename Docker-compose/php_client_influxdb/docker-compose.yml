@@ -1,0 +1,24 @@
+services:
+  web:
+    image: fabricioitajuba/apache-phpclient-influxdb
+    container_name: apache-php-influxdb
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "80:80"
+    links:
+      - influxdb
+    networks:
+      - default
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    volumes:
+      - ./data:/var/lib/influxdb2
+      - ./config:/etc/influxdb2
+    networks:
+      - default
