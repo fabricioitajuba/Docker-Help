@@ -1,0 +1,13 @@
+services:
+
+  web:
+    image: php:7.4-apache
+    container_name: apache-php
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "80:80"
+    networks:
+      - default
+
