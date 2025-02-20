@@ -1,0 +1,20 @@
+- Renomear o arquivo env.txt para .env
+
+- Para subir os containers:
+
+$ docker compose --env-file .env up -d
+
+- Para parar os containers sem deletar os volumes e redes:
+
+$ docker compose down
+
+- Para parar os containers, deletar os volumes e redes:
+
+$ docker compose down -v
+
+Para acessar o wordpress: localhost:8080
+Para acessar o phpmyadmin: localhost:8081
+
+Servidor: mysql
+Usuário: root
+Senha: pass
