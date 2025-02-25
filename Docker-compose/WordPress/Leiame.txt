@@ -1,0 +1,46 @@
+Executando os containers pela primeira vez:
+
+- Renomear o arquivo env.txt para .env
+
+- Para subir os containers:
+$ docker compose --env-file .env up -d
+
+- Entre no container do wordpres:
+$ docker exec -it wordpress /bin/bash
+
+- Copie o conteúdo da pasta /usr/local/etc/php para dentro da pasta /tmp do container:
+# cp -r /usr/local/etc/php/ /tmp
+
+- Saia do container:
+# exit
+
+- Pare os containers, deletar os volumes e redes:
+$ docker compose down -v
+
+- copie o conteúdo da pasta: ./wordpress_bck/php para dentro da pasta ./wordpress_php_data
+
+- Edite o conteúdo o arquivo "php.ini-production" e localise a linha "upload_max_filesize"
+
+- Altere o valor de 2M para 64M;
+
+- Salve o arquivo com o nome de "php.ini";
+
+- No arquivo "compose.yaml", descomente a linha:
+
+    #- ./wordpress_php_data:/usr/local/etc/php
+    para:
+    - ./wordpress_php_data:/usr/local/etc/php
+
+- Suba novamente os containers:
+
+$ docker compose --env-file .env up -d
+
+Para acessar o wordpress: localhost:8080
+Para acessar o phpmyadmin: localhost:8081
+
+Servidor: mysql
+Usuário: root
+Senha: pass
+
+
+
