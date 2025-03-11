@@ -1,0 +1,15 @@
+Objeto:
+const obj = {name: "John", age: 30, city: "New York"};
+
+JSON:
+{"name":"John","age":30,"city":"New York"}
+
+
+<script>
+const obj = {name: "John", age: 30, city: "New York"};
+const myJSON = JSON.stringify(obj);
+document.getElementById("demo").innerHTML = myJSON;
+</script>
+
+No javascript, converter um array de ojeto para json: Json.stringify(array);
+No javascript, converter um json para um array de ojeto: Json.parse(array);

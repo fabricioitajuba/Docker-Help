@@ -1,0 +1,28 @@
+services:
+  
+  web:
+    image: php:7.4-apache
+    container_name: Apache-php
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "80:80"
+    networks:
+      - default
+
+  app:
+    image: openswoole/swoole
+    container_name: openswoole
+    restart: always
+    environment:
+      AUTORELOAD_PROGRAMS: "swoole"
+      AUTORELOAD_ANY_FILES: 0
+    ports:
+      - 9502:9502
+    volumes:
+      - ./server:/var/www
+    links:
+      - web
+    networks:
+      - default      
