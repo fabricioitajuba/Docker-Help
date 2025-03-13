@@ -1,0 +1,18 @@
+Teste com Rotas em php
+
+-Para trabalharmos com o php usando rotas, temos que criar uma imagem que possua: "a2enmod e rewrite"
+
+-Para construir a imagem do apache :
+# docker build -t fabricioitajuba/apache-php-mysqli-pdo-json:latest .
+
+-Para criar os containers:
+# docker compose up -d
+
+- Para "derrubar" os containers, apagar os volumes e redes:
+# docker compose down -v
+
+-Para acessar a página principal:
+
+no navegador: 
+localhost ou
+localhost/

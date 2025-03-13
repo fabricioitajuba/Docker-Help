@@ -1,0 +1,13 @@
+services:
+
+  web:
+    image: fabricioitajuba/apache-php-mysqli-pdo-json
+    container_name: apache-php
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "80:80"
+    networks:
+      - default
+
