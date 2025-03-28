@@ -1,0 +1,12 @@
+phpmyadmin seguro
+https://stackoverflow.com/questions/71342429/phpmyadmin-with-docker-not-using-ssl-when-connecting-to-aws-rds-instance
+https://blog.zotorn.de/phpmyadmin-docker-image-with-ssl-tls/
+
+- Crie a imagem:
+$ docker build -t fabricioitajuba/phpmyadmin-ssl:latest .
+
+- Criar o container:
+$ docker compose up -d
+
+- Para o container, deletar as redes e volumes:
+$ docker compose down -v

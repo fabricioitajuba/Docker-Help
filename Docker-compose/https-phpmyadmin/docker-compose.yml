@@ -1,0 +1,14 @@
+services:
+
+  phpmyadmin:
+    image: fabricioitajuba/phpmyadmin-ssl:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 81:443
+    volumes:
+      - ./conf/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./cert/localhost.crt:/etc/ssl/localhost.crt
+      - ./cert/localhost.key:/etc/ssl/localhost.key
+    networks:
+      - default
