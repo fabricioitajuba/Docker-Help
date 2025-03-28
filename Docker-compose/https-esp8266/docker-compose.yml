@@ -1,0 +1,49 @@
+services:
+
+  web:
+    image: fabricioitajuba/apache-php-ssl:latest
+    container_name: apache-php-https
+    restart: always
+    volumes:
+      - ./conf:/etc/apache2/sites-available/
+      - ./cert:/etc/ssl/certs/
+      - ./cert:/etc/ssl/private/
+      - ./www:/var/www/html/
+    ports:
+      - "443:443"
+    networks:
+      - default
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - ./db:/etc/mysql/conf.d
+      - ./db_vol:/var/lib/mysql
+    networks:
+      - default
+
+  phpmyadmin:
+    image: fabricioitajuba/phpmyadmin-ssl:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 81:443
+    volumes:
+      - ./conf/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./cert/localhost.crt:/etc/ssl/localhost.crt
+      - ./cert/localhost.key:/etc/ssl/localhost.key
+    links:
+      - db      
+    networks:
+      - default      

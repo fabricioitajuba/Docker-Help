@@ -1,0 +1,22 @@
+Acesso do ESP8266 em um servidor HTTPS
+
+-Renomear o arquivo env.txt para .env
+
+-Para criar os containers:
+# docker compose --env-file .env up -d
+
+- Para "derrubar" os containers, apagar os volumes e redes:
+# docker compose down -v
+
+-Para acessar a página:
+no navegador: https://localhost
+
+-Para acessar o phpmyadmin:
+no navegador: https://localhost:81  
+
+Servidor: db
+Usuário: root ou admin
+Senha: pass
+
+senhas: root/pass ou admin/pass
+
