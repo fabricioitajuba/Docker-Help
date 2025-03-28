@@ -1,0 +1,96 @@
+Apache https com PHP (certificado auto-assinado)
+
+- Criar a pasta wwww:
+$ mkdir wwww
+
+coloque a aplicação dentro deste diretório
+
+- Criar a pasta cert:
+$ mkdir cert
+
+- Criar a pasta conf:
+$ mkdir conf
+
+- Entre na pasta /cert
+$ cd cert
+
+- Crie o certificado e a chave:
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -subj "/C=US/ST=YourState/L=YourCity/O=YourOrganization/CN=localhost"
+
+- Volte um diretório:
+$ cd ..
+
+- Entre na pasta /conf
+$ cd conf
+
+- Crie o arquivo de configuração "my-ssl.conf":
+$ sudo nano my-ssl.conf
+
+Adicione as seguintes linhas:
+
+<VirtualHost *:443>
+    DocumentRoot "/var/www/html"
+    ServerName localhost
+
+    SSLEngine on
+    SSLCertificateFile "/etc/ssl/certs/localhost.crt"
+    SSLCertificateKeyFile "/etc/ssl/private/localhost.key"
+
+    # Other directives here
+</VirtualHost>
+
+Salve e feche o arquivo
+
+- Volte um diretório:
+$ cd ..
+
+- Crie o arquivo Dockerfile:
+$ sudo nano Dockerfile
+
+Adicione as seguintes linhas:
+
+# Use an official PHP image with Apache
+FROM php:8.4-apache
+
+# Enable SSL module, configure Apache for PHP support, and enable our SSL site configuration
+RUN a2enmod ssl && \
+    a2enmod rewrite && \
+    a2dissite 000-default default-ssl && \
+    a2ensite my-ssl
+
+Salve e feche o arquivo
+
+- Crie a imagem:
+$ docker build -t fabricioitajuba/apache-php-ssl:latest .
+
+- Crie o arquivo docker-compose.yml:
+$ sudo nano docker-compose.yml
+
+Adicione as seguintes linhas:
+
+services:
+
+  web:
+    image: fabricioitajuba/apache-php-ssl:latest
+    container_name: apache-php-https
+    restart: always
+    volumes:
+      - ./conf:/etc/apache2/sites-available/
+      - ./cert:/etc/ssl/certs/
+      - ./cert:/etc/ssl/private/
+      - ./www:/var/www/html/
+    ports:
+      - "443:443"
+    networks:
+      - default
+
+Salve e feche o arquivo
+
+- Crie o container:
+$ docker compose up -d
+
+- Para parar o container deletar os volumes e as redes:
+$ docker compose down -v
+
+- Acesse o site no navegador:
+https://localhost/

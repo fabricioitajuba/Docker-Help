@@ -1,0 +1,13 @@
+services:
+
+  web:
+    image: fabricioitajuba/apache-php-ssl:latest
+    container_name: apache-php-https
+    restart: always
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - "443:443"
+    networks:
+      - default
+
