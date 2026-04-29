@@ -1,0 +1,37 @@
+Para aumentar o tamanho do upload do php no wordpress:
+
+docker exec -it "id do container" cat /var/www/html .htaccess
+
+Ex:
+docker exec -it 89f2dbbb8272 cat /var/www/html .htaccess
+docker exec -it "id do container" sh
+apt update
+apt upgrade
+apt install nano
+nano /var/www/html .htaccess
+
+mudar:
+php_value upload_max_filesize 256M
+
+para
+php_value upload_max_filesize 512M
+
+exit
+docker compose restart
+
+
+## Tentativas mal sucedidas:
+
+touch /usr/local/etc/php/conf.d/uploads.ini
+echo "upload_max_filesize = 512M;" >> /usr/local/etc/php/conf.d/uploads.ini
+echo "post_max_size = 512M;" >> /usr/local/etc/php/conf.d/uploads.ini
+exit
+docker compose restart
+
+docker exec -it "id do container" cat /usr/local/etc/php/conf.d/uploads.ini
+
+
+$ docker container exec -it "id do container" -c "echo 'php_value upload_max_filesize 512M' > '/var/www/html/.htaccess'"
+Ex:
+$ docker container exec -it 89f2dbbb8272 -c "echo 'php_value upload_max_filesize 512M' > '/var/www/html/.htaccess'"
+
