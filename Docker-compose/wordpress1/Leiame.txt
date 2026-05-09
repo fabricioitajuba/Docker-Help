@@ -1,7 +1,5 @@
 https://www.youtube.com/watch?v=HkPomTmihLM
 
-Esse compose é mais simples que o da pasta wordpress
-
 - Para subir os containers pela primeira vez:
 docker compose up -d
 
@@ -19,3 +17,22 @@ docker compose down -v
 
 - Para saber quais container estão sendo executados:
 docker ps -a
+
+
+Detalhes da configuração principal
+
+Volumes Compartilhados : Tanto o serviço wordpressquanto ftpo serviço devem montar 
+o mesmo volume ( wordpress_files) nos respectivos diretórios onde servem ou gerenciam arquivos.
+
+Portas passivas : O FTP requer que uma série de portas passivas (por exemplo, 8080 30000-30009) 
+estejam abertas na ftpconfiguração do serviço para que as transferências de dados sejam bem-sucedidas.
+
+Permissões de Arquivo : Para evitar o erro comum "WordPress solicitando credenciais de FTP" ao 
+instalar plugins, certifique-se de que o servidor web (geralmente UID 33) tenha a propriedade dos 
+arquivos. Você pode corrigir isso executando: 
+
+$ docker exec -it <wordpress_container_name> chown -R 33:33 /var/www/html
+
+Acesso direto a arquivos : Se você precisa de FTP apenas para contornar problemas de permissão no painel do 
+WordPress, pode adicionar essa configuração define('FS_METHOD', 'direct');
+ao seu wp-config.phparquivo para permitir atualizações diretas sem um servidor FTP.
