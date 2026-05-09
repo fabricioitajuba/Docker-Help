@@ -47,6 +47,8 @@ services:
       FTP_USER_NAME: admin
       FTP_USER_PASS: admin
       FTP_USER_HOME: /home/ftpuser
+      FTP_USER_UID: 33
+      FTP_USER_GID: 33
     volumes:
       - wordpress_files:/home/ftpuser
 
