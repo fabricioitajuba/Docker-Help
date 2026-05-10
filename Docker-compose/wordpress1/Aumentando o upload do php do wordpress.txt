@@ -31,14 +31,36 @@ apt upgrade
 apt install nano
 nano /var/www/html .htaccess
 
-mudar:
-php_value upload_max_filesize 256M
+adicionar:
 
-para
 php_value upload_max_filesize 512M
+php_value post_max_size 512M
+php_value memory_limit 256M
+php_value max_execution_time 300
 
-exit
-docker compose restart
+Ex:
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+php_value upload_max_filesize 512M
+php_value post_max_size 512M
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+</IfModule>
+
+Salvar e sair
+
+# exit
+$ docker compose restart
 
 Verifique se a linha foi criada ou alterada:
 $ docker exec -it "id do container do wordpress" cat /var/www/html .htaccess
@@ -58,4 +80,5 @@ docker exec -it "id do container" cat /usr/local/etc/php/conf.d/uploads.ini
 $ docker container exec -it "id do container" -c "echo 'php_value upload_max_filesize 512M' > '/var/www/html/.htaccess'"
 Ex:
 $ docker container exec -it 89f2dbbb8272 -c "echo 'php_value upload_max_filesize 512M' > '/var/www/html/.htaccess'"
+
 
